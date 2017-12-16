@@ -20,7 +20,7 @@ Public Class Form1
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        CMS.Parent = Me.Parent
     End Sub
 
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
@@ -63,12 +63,19 @@ Public Class Form1
     End Sub
 
     Private Sub Form1_MouseClick(sender As Object, e As MouseEventArgs) Handles MyBase.MouseClick
-        If (e.Button = MouseButtons.Right) Then
-            CMS.Parent = Me.Parent
-            CMS.Show()
-            CMS.Location = New Point(e.X + Me.Left, e.Y + Me.Top)
 
+        If (e.Button = MouseButtons.Right) Then
+            CMS.Items.Clear()
             CMS.Items.Add("test")
+            CMS.Items.Add("test1")
+            CMS.Show()
+            CMS.Location = New Point(e.X + Me.Left, e.Y + Me.Top + 20)
+            AddHandler CMS.Click, AddressOf checkCMS
         End If
+
+    End Sub
+    Sub checkCMS()
+        If CMS.Items.Item(0).Selected Then MsgBox("test")
+        If CMS.Items.Item(1).Selected Then MsgBox("test1")
     End Sub
 End Class
