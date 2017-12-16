@@ -1,0 +1,13 @@
+D:\Code\AdvancedToolBar\AdvancedToolBar\bin\Debug\AdvancedToolBar.exe.config
+D:\Code\AdvancedToolBar\AdvancedToolBar\bin\Debug\AdvancedToolBar.exe
+D:\Code\AdvancedToolBar\AdvancedToolBar\bin\Debug\AdvancedToolBar.pdb
+D:\Code\AdvancedToolBar\AdvancedToolBar\bin\Debug\AdvancedToolBar.xml
+D:\Code\AdvancedToolBar\AdvancedToolBar\obj\Debug\AdvancedToolBar.vbprojResolveAssemblyReference.cache
+D:\Code\AdvancedToolBar\AdvancedToolBar\obj\Debug\AdvancedToolBar.Form1.resources
+D:\Code\AdvancedToolBar\AdvancedToolBar\obj\Debug\AdvancedToolBar.Resources.resources
+D:\Code\AdvancedToolBar\AdvancedToolBar\obj\Debug\AdvancedToolBar.vbproj.GenerateResource.Cache
+D:\Code\AdvancedToolBar\AdvancedToolBar\obj\Debug\AdvancedToolBar.exe
+D:\Code\AdvancedToolBar\AdvancedToolBar\obj\Debug\AdvancedToolBar.xml
+D:\Code\AdvancedToolBar\AdvancedToolBar\obj\Debug\AdvancedToolBar.pdb
+D:\Code\AdvancedToolBar\AdvancedToolBar\obj\Debug\Interop.Shell32.dll
+D:\Code\AdvancedToolBar\AdvancedToolBar\obj\Debug\AdvancedToolBar.vbproj.ResolveComReference.cache
