@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Form1
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,12 +20,13 @@ Partial Class Form1
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.CMS = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.ExpandableGroupbox1 = New AdvancedToolBar.ExpandableGroupbox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -45,6 +46,15 @@ Partial Class Form1
         Me.PictureBox1.TabIndex = 1
         Me.PictureBox1.TabStop = False
         '
+        'ExpandableGroupbox1
+        '
+        Me.ExpandableGroupbox1.Caption = Nothing
+        Me.ExpandableGroupbox1.HeaderClickExpand = True
+        Me.ExpandableGroupbox1.Location = New System.Drawing.Point(646, 228)
+        Me.ExpandableGroupbox1.Name = "ExpandableGroupbox1"
+        Me.ExpandableGroupbox1.Size = New System.Drawing.Size(200, 100)
+        Me.ExpandableGroupbox1.TabIndex = 2
+        '
         'Form1
         '
         Me.AllowDrop = True
@@ -53,6 +63,7 @@ Partial Class Form1
         Me.AutoScroll = True
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(938, 678)
+        Me.Controls.Add(Me.ExpandableGroupbox1)
         Me.Controls.Add(Me.PictureBox1)
         Me.Name = "Form1"
         Me.Text = "Form1"
@@ -64,4 +75,5 @@ Partial Class Form1
     Friend WithEvents Timer1 As Timer
     Friend WithEvents CMS As ContextMenuStrip
     Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents ExpandableGroupbox1 As ExpandableGroupbox
 End Class

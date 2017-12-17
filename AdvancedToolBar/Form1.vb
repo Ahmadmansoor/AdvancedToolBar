@@ -1,7 +1,12 @@
 ﻿Imports Shell32
 Imports System.Runtime.InteropServices
 Public Class Form1
-
+    Dim rc As ResizeableControl
+    Private Structure gbCountHieght_
+        Dim count As Integer
+        Dim Hieght As Integer
+    End Structure
+    Dim gbCountHieght As New gbCountHieght_
 
     'Private WithEvents kbHook As New KeyboardHook
 
@@ -21,6 +26,7 @@ Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         CMS.Parent = Me.Parent
+        rc = New ResizeableControl(ExpandableGroupbox1)
     End Sub
 
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
@@ -66,16 +72,48 @@ Public Class Form1
 
         If (e.Button = MouseButtons.Right) Then
             CMS.Items.Clear()
-            CMS.Items.Add("test")
-            CMS.Items.Add("test1")
+            CMS.Items.Add("Add group area")
+            'CMS.Items.Add("test1")
             CMS.Show()
             CMS.Location = New Point(e.X + Me.Left, e.Y + Me.Top + 20)
-            AddHandler CMS.Click, AddressOf checkCMS
+            AddHandler CMS.MouseClick, AddressOf checkCMS
         End If
 
     End Sub
     Sub checkCMS()
-        If CMS.Items.Item(0).Selected Then MsgBox("test")
-        If CMS.Items.Item(1).Selected Then MsgBox("test1")
+        If CMS.Items.Item(0).Selected Then
+            Dim gb As New ExpandableGroupbox
+            Getgbcount()
+            Me.Controls.Add(gb)
+            gb.Location = New Point(0, gbCountHieght.Hieght)
+            'gb.Size = New Size(20, 20)
+            gb.Show()
+            Me.Refresh()
+        End If
+        'If CMS.Items.Item(1).Selected Then MsgBox("test1")
+    End Sub
+
+    ''' <summary>
+    ''' to get how many ExpandableGroupbox in the form so we can calculate the hieght and
+    ''' add the new control next to last one of controls
+    ''' </summary>
+    Sub Getgbcount()
+        Dim count = 0, hieght As Integer = 0
+        For Each con As Control In Me.Controls
+            If TypeOf con Is ExpandableGroupbox Then
+                count += 1
+                hieght = count * con.Height
+            End If
+        Next
+
+        gbCountHieght.count = count
+        gbCountHieght.Hieght = hieght
+    End Sub
+
+    Private Sub ExpandableGroupbox1_MouseDown(sender As Object, e As MouseEventArgs) Handles ExpandableGroupbox1.MouseDown
+        'If (e.Y + Me.Top = ExpandableGroupbox1.Location.Y) Then
+        ExpandableGroupbox1.Height += e.Y - ExpandableGroupbox1.Top
+        Me.Refresh()
+        ' End If
     End Sub
 End Class

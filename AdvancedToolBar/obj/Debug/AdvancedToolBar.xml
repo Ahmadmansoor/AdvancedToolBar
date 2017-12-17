@@ -6,6 +6,59 @@ AdvancedToolBar
 </name>
 </assembly>
 <members>
+<member name="E:AdvancedToolBar.ExpandableGroupbox.Expand">
+ <summary>
+ Fired when the control is Expanded or Collapsed.
+ </summary>
+</member>
+<member name="P:AdvancedToolBar.ExpandableGroupbox.Caption">
+ <summary>
+ The text shown as the caption of the <see cref="T:AdvancedToolBar.ExpandableGroupbox" />.
+ </summary>
+</member>
+<member name="P:AdvancedToolBar.ExpandableGroupbox.BorderColor">
+ <summary>
+ The color of the custom-drawn rounded border.
+ </summary>
+</member>
+<member name="P:AdvancedToolBar.ExpandableGroupbox.Expanded">
+ <summary>
+ True when the control is expanded.
+ </summary>
+</member>
+<member name="P:AdvancedToolBar.ExpandableGroupbox.CaptionColor">
+ <summary>
+ The ForeColor of the text shown as the caption of the <see cref="T:AdvancedToolBar.ExpandableGroupbox" />.
+ </summary>
+</member>
+<member name="P:AdvancedToolBar.ExpandableGroupbox.ExpandedSize">
+ <summary>
+ The Size of the <see cref="T:AdvancedToolBar.ExpandableGroupbox" /> when expanded. Should be set by resizing the control in the designer as usual.
+ </summary>
+</member>
+<member name="P:AdvancedToolBar.ExpandableGroupbox.HeaderClickExpand">
+ <summary>
+ If True, expands / collapses the control when the header (caption) is clicked, instead of using the button only.
+ </summary>
+</member>
+<member name="M:AdvancedToolBar.ExpandableGroupbox.OnExpand">
+ <summary>
+ Changes the Size property of the control when it is expanded/collapsed.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="T:AdvancedToolBar.ExpandableGroupboxDesigner">
+ <summary>
+ Designer class that enables the user to expand/collapse the <see cref="T:AdvancedToolBar.ExpandableGroupbox" /> control during Design-Time.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:AdvancedToolBar.Form1.Getgbcount">
+ <summary>
+ to get how many ExpandableGroupbox in the form so we can calculate the hieght and
+ add the new control next to last one of controls
+ </summary>
+</member>
 <member name="T:AdvancedToolBar.My.Resources.Resources">
 <summary>
   A strongly-typed resource class, for looking up localized strings, etc.
