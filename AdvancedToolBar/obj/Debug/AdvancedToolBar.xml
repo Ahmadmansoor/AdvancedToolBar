@@ -53,7 +53,7 @@ AdvancedToolBar
  </summary>
  <remarks></remarks>
 </member>
-<member name="M:AdvancedToolBar.Form1.Getgbcount">
+<member name="M:AdvancedToolBar.MainForm.Getgbcount">
  <summary>
  to get how many ExpandableGroupbox in the form so we can calculate the hieght and
  add the new control next to last one of controls

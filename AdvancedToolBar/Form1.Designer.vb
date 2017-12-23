@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class Form1
+Partial Class MainForm
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -25,8 +25,9 @@ Partial Class Form1
         Me.components = New System.ComponentModel.Container()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.CMS = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.AddGroupAreaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.ExpandableGroupbox1 = New AdvancedToolBar.ExpandableGroupbox()
+        Me.CMS.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -35,38 +36,37 @@ Partial Class Form1
         '
         'CMS
         '
+        Me.CMS.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddGroupAreaToolStripMenuItem})
         Me.CMS.Name = "CMS"
-        Me.CMS.Size = New System.Drawing.Size(61, 4)
+        Me.CMS.Size = New System.Drawing.Size(157, 26)
+        '
+        'AddGroupAreaToolStripMenuItem
+        '
+        Me.AddGroupAreaToolStripMenuItem.Name = "AddGroupAreaToolStripMenuItem"
+        Me.AddGroupAreaToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
+        Me.AddGroupAreaToolStripMenuItem.Text = "Add group area"
         '
         'PictureBox1
         '
-        Me.PictureBox1.Location = New System.Drawing.Point(831, 12)
+        Me.PictureBox1.Location = New System.Drawing.Point(12, 595)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(95, 54)
         Me.PictureBox1.TabIndex = 1
         Me.PictureBox1.TabStop = False
         '
-        'ExpandableGroupbox1
-        '
-        Me.ExpandableGroupbox1.Caption = Nothing
-        Me.ExpandableGroupbox1.HeaderClickExpand = True
-        Me.ExpandableGroupbox1.Location = New System.Drawing.Point(646, 228)
-        Me.ExpandableGroupbox1.Name = "ExpandableGroupbox1"
-        Me.ExpandableGroupbox1.Size = New System.Drawing.Size(200, 100)
-        Me.ExpandableGroupbox1.TabIndex = 2
-        '
-        'Form1
+        'MainForm
         '
         Me.AllowDrop = True
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
-        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(938, 678)
-        Me.Controls.Add(Me.ExpandableGroupbox1)
         Me.Controls.Add(Me.PictureBox1)
-        Me.Name = "Form1"
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
+        Me.Name = "MainForm"
         Me.Text = "Form1"
+        Me.CMS.ResumeLayout(False)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -75,5 +75,5 @@ Partial Class Form1
     Friend WithEvents Timer1 As Timer
     Friend WithEvents CMS As ContextMenuStrip
     Friend WithEvents PictureBox1 As PictureBox
-    Friend WithEvents ExpandableGroupbox1 As ExpandableGroupbox
+    Friend WithEvents AddGroupAreaToolStripMenuItem As ToolStripMenuItem
 End Class

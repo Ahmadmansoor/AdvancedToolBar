@@ -1,7 +1,8 @@
 ﻿Imports Shell32
 Imports System.Runtime.InteropServices
-Public Class Form1
+Public Class MainForm
     Dim rc As ResizeableControl
+    Dim onetime As Boolean = False
     Private Structure gbCountHieght_
         Dim count As Integer
         Dim Hieght As Integer
@@ -23,30 +24,25 @@ Public Class Form1
         Timer1.Stop()
         Timer1.Enabled = False
     End Sub
-
-    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         CMS.Parent = Me.Parent
-        rc = New ResizeableControl(ExpandableGroupbox1)
+        '    'rc = New ResizeableControl(ExpandableGroupbox1)
     End Sub
 
-    Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        'e.Cancel = True
-        'Me.Hide()
-    End Sub
-
-    Private Sub Form1_DragEnter(sender As Object, e As DragEventArgs) Handles MyBase.DragEnter
+    'Private Sub MainForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+    '    'e.Cancel = True
+    '    'Me.Hide()
+    'End Sub
+    Private Sub MainForm_DragEnter(sender As Object, e As DragEventArgs) Handles MyBase.DragEnter
         If e.Data.GetDataPresent(DataFormats.FileDrop) Then
             e.Effect = DragDropEffects.Copy
         End If
     End Sub
-
-    Private Sub Form1_DragDrop(sender As Object, e As DragEventArgs) Handles MyBase.DragDrop
+    Private Sub MainForm_DragDrop(sender As Object, e As DragEventArgs) Handles MyBase.DragDrop
         Dim fileName() As String = e.Data.GetData(DataFormats.FileDrop)
         'MsgBox(GetLnkTarget(fileName(0)))
         'Dim myIcon As System.Drawing.Icon = Image.FromFile(fileName(0))
         'PictureBox1.Image = Image.FromFile(fileName(0))
-
-
         Dim hImgLarge As IntPtr  'The handle to the system image list.
         Dim shinfo As SHFILEINFO
         shinfo = New SHFILEINFO()
@@ -67,38 +63,45 @@ Public Class Form1
         PictureBox1.Image = myIcon.ToBitmap
 
     End Sub
-
-    Private Sub Form1_MouseClick(sender As Object, e As MouseEventArgs) Handles MyBase.MouseClick
+    Private Sub MainForm_MouseClick(sender As Object, e As MouseEventArgs) Handles MyBase.MouseClick
 
         If (e.Button = MouseButtons.Right) Then
-            CMS.Items.Clear()
-            CMS.Items.Add("Add group area")
-            'CMS.Items.Add("test1")
+            CMS.Parent = Me.Parent
             CMS.Show()
             CMS.Location = New Point(e.X + Me.Left, e.Y + Me.Top + 20)
-            AddHandler CMS.MouseClick, AddressOf checkCMS
         End If
 
     End Sub
-    Sub checkCMS()
-        If CMS.Items.Item(0).Selected Then
-            Dim gb As New ExpandableGroupbox
-            Getgbcount()
-            Me.Controls.Add(gb)
-            gb.Location = New Point(0, gbCountHieght.Hieght)
-            'gb.Size = New Size(20, 20)
-            gb.Show()
-            Me.Refresh()
-        End If
-        'If CMS.Items.Item(1).Selected Then MsgBox("test1")
-    End Sub
+    'Sub checkCMS()
+    '    If CMS.Items.Item(0).Selected Then
+    '        Dim gb As New ExpandableGroupbox()
+    '        Getgbcount()
+    '        Me.Controls.Add(gb)
+    '        gb.Location = New Point(0, gbCountHieght.Hieght)
+    '        AddHandler gb.MouseClick, AddressOf gb_Click
+    '        'AddHandler gb.Click, AddressOf gb_Click
+    '        gb.Show()
+    '        Me.Refresh()
+    '    End If
+    '    'If CMS.Items.Item(1).Selected Then MsgBox("test1")
+    'End Sub
+    Sub gb_Click(sender As Object, e As MouseEventArgs)
+        If (e.Button = MouseButtons.Right) Then
+            CMS.Show()
 
+            Dim cp = Cursor.Position()
+            cp.X += Me.Left
+            cp.Y += Me.Top + 20
+            'CMS.Location = New Point(e.X + Me.Left, e.Y + Me.Top + 20)
+            CMS.Location = New Point(PointToClient(cp))
+        End If
+    End Sub
     ''' <summary>
     ''' to get how many ExpandableGroupbox in the form so we can calculate the hieght and
     ''' add the new control next to last one of controls
     ''' </summary>
     Sub Getgbcount()
-        Dim count = 0, hieght As Integer = 0
+        Dim count = 0, hieght = 0, width As Integer = 0
         For Each con As Control In Me.Controls
             If TypeOf con Is ExpandableGroupbox Then
                 count += 1
@@ -108,12 +111,23 @@ Public Class Form1
 
         gbCountHieght.count = count
         gbCountHieght.Hieght = hieght
+
     End Sub
 
-    Private Sub ExpandableGroupbox1_MouseDown(sender As Object, e As MouseEventArgs) Handles ExpandableGroupbox1.MouseDown
-        'If (e.Y + Me.Top = ExpandableGroupbox1.Location.Y) Then
-        ExpandableGroupbox1.Height += e.Y - ExpandableGroupbox1.Top
+    Private Sub AddGroupAreaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddGroupAreaToolStripMenuItem.Click
+        Dim gb As New ExpandableGroupbox
+        Getgbcount()
+        Me.Controls.Add(gb)
+        'gb.Size = New Size(Me.Width - gb.Left, 100)
+        gb.Location = New Point(0, gbCountHieght.Hieght)
+
+        AddHandler gb.MouseClick, AddressOf gb_Click
+        gb.Show()
         Me.Refresh()
-        ' End If
+
+    End Sub
+
+    Private Sub MainForm_ResizeEnd(sender As Object, e As EventArgs) Handles MyBase.ResizeEnd
+        Me.Refresh()
     End Sub
 End Class

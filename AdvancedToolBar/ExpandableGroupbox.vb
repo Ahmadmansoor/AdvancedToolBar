@@ -188,10 +188,13 @@ Public Class ExpandableGroupbox
         Me.CaptionColor = Color.FromArgb(51, 94, 168)
         Me.HeaderClickExpand = True
 
-        Me.Size = New Size(200, 100)
+        'Me.Size = New Size(200, 100)
+        Me.Size = New Size(MainForm.Width - 27, 100)
 
         Me.lblCaption.Text = Me.Caption
         Me.lblCaption.ForeColor = Me.CaptionColor
+
+        Me.Anchor = AnchorStyles.Right Or AnchorStyles.Left
     End Sub
 
 #Region " Methods "
