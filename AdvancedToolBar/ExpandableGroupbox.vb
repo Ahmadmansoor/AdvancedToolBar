@@ -20,6 +20,8 @@ Public Class ExpandableGroupbox
         End Try
     End Sub
 
+    Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
+
     'Required by the Windows Form Designer
     Private components As System.ComponentModel.IContainer
 
@@ -28,9 +30,10 @@ Public Class ExpandableGroupbox
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.pnlHeader = New System.Windows.Forms.Panel
-        Me.ExpandButton = New System.Windows.Forms.Button
-        Me.lblCaption = New System.Windows.Forms.Label
+        Me.pnlHeader = New System.Windows.Forms.Panel()
+        Me.ExpandButton = New System.Windows.Forms.Button()
+        Me.lblCaption = New System.Windows.Forms.Label()
+        Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.pnlHeader.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -57,13 +60,24 @@ Public Class ExpandableGroupbox
         Me.lblCaption.AutoSize = True
         Me.lblCaption.Location = New System.Drawing.Point(27, 3)
         Me.lblCaption.Name = "lblCaption"
-        Me.lblCaption.Size = New System.Drawing.Size(39, 13)
+        Me.lblCaption.Size = New System.Drawing.Size(0, 13)
         Me.lblCaption.TabIndex = 0
+        '
+        'FlowLayoutPanel1
+        '
+        Me.FlowLayoutPanel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(1, 25)
+        Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(326, 161)
+        Me.FlowLayoutPanel1.TabIndex = 1
         '
         'ExpandableGroupbox
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.FlowLayoutPanel1)
         Me.Controls.Add(Me.pnlHeader)
         Me.Name = "ExpandableGroupbox"
         Me.Size = New System.Drawing.Size(330, 189)
@@ -89,7 +103,7 @@ Public Class ExpandableGroupbox
     ''' <summary>
     ''' The text shown as the caption of the <see cref="ExpandableGroupbox" />.
     ''' </summary>
-    <Browsable(True)> _
+    <Browsable(True)>
     Public Property Caption() As String
         Get
             Return _Caption
@@ -104,7 +118,7 @@ Public Class ExpandableGroupbox
     ''' <summary>
     ''' The color of the custom-drawn rounded border.
     ''' </summary>
-    <DefaultValue(GetType(Color), "214, 213, 217")> _
+    <DefaultValue(GetType(Color), "214, 213, 217")>
     Public Property BorderColor() As Color
         Get
             Return _BorderColor
@@ -118,7 +132,7 @@ Public Class ExpandableGroupbox
     ''' <summary>
     ''' True when the control is expanded.
     ''' </summary>
-    <DefaultValue(True)> _
+    <DefaultValue(True)>
     Public Property Expanded() As Boolean
         Get
             Return _Expanded
@@ -135,7 +149,7 @@ Public Class ExpandableGroupbox
     ''' <summary>
     ''' The ForeColor of the text shown as the caption of the <see cref="ExpandableGroupbox" />.
     ''' </summary>
-    <DefaultValue(GetType(Color), "51, 94, 168")> _
+    <DefaultValue(GetType(Color), "51, 94, 168")>
     Public Property CaptionColor() As Color
         Get
             Return _CaptionColor
@@ -151,8 +165,8 @@ Public Class ExpandableGroupbox
     ''' <summary>
     ''' The Size of the <see cref="ExpandableGroupbox" /> when expanded. Should be set by resizing the control in the designer as usual.
     ''' </summary>
-    <Browsable(False), _
-    DefaultValue(GetType(Size), "200, 100")> _
+    <Browsable(False),
+    DefaultValue(GetType(Size), "200, 100")>
     Public Property ExpandedSize() As Size
         Get
             Return _ExpandedSize
@@ -166,7 +180,7 @@ Public Class ExpandableGroupbox
     ''' <summary>
     ''' If True, expands / collapses the control when the header (caption) is clicked, instead of using the button only.
     ''' </summary>
-    <DefaultValue(False)> _
+    <DefaultValue(False)>
     Public Property HeaderClickExpand() As Boolean
         Get
             Return _HeaderClickExpand
@@ -309,6 +323,10 @@ Public Class ExpandableGroupbox
         If Not Me.Expanded Then
             e.Graphics.DrawLine(Pens.Black, ExpandButton.Width \ 2, 5, ExpandButton.Width \ 2, ExpandButton.Height - 6)
         End If
+    End Sub
+
+    Private Sub FlowLayoutPanel1_MouseClick(sender As Object, e As MouseEventArgs) Handles FlowLayoutPanel1.MouseClick
+        MsgBox(Me.Caption)
     End Sub
 
 #End Region

@@ -11,3 +11,4 @@ D:\Code\AdvancedToolBar\AdvancedToolBar\obj\Debug\AdvancedToolBar.pdb
 D:\Code\AdvancedToolBar\AdvancedToolBar\obj\Debug\Interop.Shell32.dll
 D:\Code\AdvancedToolBar\AdvancedToolBar\obj\Debug\AdvancedToolBar.vbproj.ResolveComReference.cache
 D:\Code\AdvancedToolBar\AdvancedToolBar\obj\Debug\AdvancedToolBar.MainForm.resources
+D:\Code\AdvancedToolBar\AdvancedToolBar\obj\Debug\AdvancedToolBar.ExpandableGroupbox.resources

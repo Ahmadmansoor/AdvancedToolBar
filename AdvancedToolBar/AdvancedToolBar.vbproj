@@ -104,6 +104,9 @@
     <Compile Include="ResizeableControl.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ExpandableGroupbox.resx">
+      <DependentUpon>ExpandableGroupbox.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>
