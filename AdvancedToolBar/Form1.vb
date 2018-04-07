@@ -3,9 +3,10 @@ Imports System.Runtime.InteropServices
 Public Class MainForm
     Dim rc As ResizeableControl
     Dim onetime As Boolean = False
+    Dim gbclickedControl As ExpandableGroupbox
     Private Structure gbCountHieght_
         Dim count As Integer
-        Dim Hieght As Integer
+        Dim top_ As Integer
     End Structure
     Dim gbCountHieght As New gbCountHieght_
 
@@ -64,9 +65,11 @@ Public Class MainForm
 
     End Sub
     Private Sub MainForm_MouseClick(sender As Object, e As MouseEventArgs) Handles MyBase.MouseClick
-
         If (e.Button = MouseButtons.Right) Then
             CMS.Parent = Me.Parent
+            RemoveButtonToolStripMenuItem.Visible = False
+            AddButtonToolStripMenuItem.Visible = False
+            RenameGroupToolStripMenuItem.Visible = False
             CMS.Show()
             CMS.Location = New Point(e.X + Me.Left, e.Y + Me.Top + 20)
         End If
@@ -87,30 +90,45 @@ Public Class MainForm
     'End Sub
     Sub gb_Click(sender As Object, e As MouseEventArgs)
         If (e.Button = MouseButtons.Right) Then
+            RemoveButtonToolStripMenuItem.Visible = True
+            AddButtonToolStripMenuItem.Visible = True
+            RenameGroupToolStripMenuItem.Visible = True
             CMS.Show()
-
             Dim cp = Cursor.Position()
             cp.X += Me.Left
             cp.Y += Me.Top + 20
             'CMS.Location = New Point(e.X + Me.Left, e.Y + Me.Top + 20)
             CMS.Location = New Point(PointToClient(cp))
+            gbclickedControl = CType(sender, ExpandableGroupbox)
         End If
+    End Sub
+    Sub gb_Expand(sender As Object, e As EventArgs)
+        Dim count = 0, top_ As Integer = 0
+        Dim Contrls_ As New List(Of ExpandableGroupbox)
+        For Each con As Control In Me.Controls
+            If TypeOf con Is ExpandableGroupbox Then
+                'count += 1
+                'con.Top = count * con.Height
+                Contrls_.Add(con)
+            End If
+        Next
+        'Contrls_.Sort()
     End Sub
     ''' <summary>
     ''' to get how many ExpandableGroupbox in the form so we can calculate the hieght and
     ''' add the new control next to last one of controls
     ''' </summary>
     Sub Getgbcount()
-        Dim count = 0, hieght = 0, width As Integer = 0
+        Dim count = 0, top_ As Integer = 0
         For Each con As Control In Me.Controls
             If TypeOf con Is ExpandableGroupbox Then
                 count += 1
-                hieght = count * con.Height
+                top_ = count * con.Height
             End If
         Next
 
         gbCountHieght.count = count
-        gbCountHieght.Hieght = hieght
+        gbCountHieght.top_ = top_
 
     End Sub
 
@@ -118,10 +136,13 @@ Public Class MainForm
         Dim gb As New ExpandableGroupbox
         Getgbcount()
         Me.Controls.Add(gb)
+        gb.Name = gb.Name & gbCountHieght.count
+        gb.Caption = gb.Name
         'gb.Size = New Size(Me.Width - gb.Left, 100)
-        gb.Location = New Point(0, gbCountHieght.Hieght)
-
+        gb.Location = New Point(0, gbCountHieght.top_)
+        gb.AutoScroll = True
         AddHandler gb.MouseClick, AddressOf gb_Click
+        AddHandler gb.Expand, AddressOf gb_Expand
         gb.Show()
         Me.Refresh()
 
@@ -130,4 +151,58 @@ Public Class MainForm
     Private Sub MainForm_ResizeEnd(sender As Object, e As EventArgs) Handles MyBase.ResizeEnd
         Me.Refresh()
     End Sub
+
+    Private Sub RenameGroupToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RenameGroupToolStripMenuItem.Click
+        Dim cp = Cursor.Position()
+        cp = New Point(PointToClient(cp))
+        Dim getControl As ExpandableGroupbox = GetChildAtPoint(cp)
+        getControl.Caption = InputBox("Change the Title of this Group", "", getControl.Caption,)
+    End Sub
+
+    Sub setButtonplace(ByVal butt As Button)
+        Dim count As Integer = 0, top_ As Integer = 0, Left_ As Integer = 0
+        top_ = butt.Height
+        For Each con As Control In gbclickedControl.Controls
+            If TypeOf con Is Button Then
+                count += 1
+
+                'top_ = count * con.Height
+
+                Left_ = count * con.Width
+                If (Left_ >= gbclickedControl.Width) Then
+                    Left_ = 0
+                    top_ = 2 * top_
+                End If
+            End If
+        Next
+
+        If count = 1 Then top_ = 30 : Left_ = 10
+        'If (Left_ < gbclickedControl.Width) Then
+        '    butt.Top = 30
+        '    butt.Left = Left_
+        'Else
+        '    butt.Top = top_ + 30
+        '    butt.Left = Left_
+        'End If
+        butt.Location = New Point(Left_, top_)
+
+    End Sub
+    Private Sub AddButtonToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddButtonToolStripMenuItem.Click
+        Dim newBu As New Button
+        gbclickedControl.Controls.Add(newBu)
+        'Dim po As Point = New Point(MousePosition.X, MousePosition.Y)
+        ' Dim controlunderclick As Control = Control.GetChildAtPoint(po, GetChildAtPointSkip.Disabled)
+        newBu.Name = newBu.Name & gbCountHieght.count
+        newBu.Text = newBu.Name
+        newBu.Size = New Size(30, 30)
+        setButtonplace(newBu)
+        'newBu.Location = New Point(10, 20)
+        'AddHandler newBu.Click, AddressOf gb_Click
+        'AddHandler gb.Expand, AddressOf gb_Expand
+        newBu.Show()
+
+        Me.Refresh()
+    End Sub
+
+
 End Class

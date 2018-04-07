@@ -26,6 +26,9 @@ Partial Class MainForm
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.CMS = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.AddGroupAreaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RenameGroupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AddButtonToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RemoveButtonToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.CMS.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -36,15 +39,33 @@ Partial Class MainForm
         '
         'CMS
         '
-        Me.CMS.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddGroupAreaToolStripMenuItem})
+        Me.CMS.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddGroupAreaToolStripMenuItem, Me.RenameGroupToolStripMenuItem, Me.AddButtonToolStripMenuItem, Me.RemoveButtonToolStripMenuItem})
         Me.CMS.Name = "CMS"
-        Me.CMS.Size = New System.Drawing.Size(157, 26)
+        Me.CMS.Size = New System.Drawing.Size(157, 92)
         '
         'AddGroupAreaToolStripMenuItem
         '
         Me.AddGroupAreaToolStripMenuItem.Name = "AddGroupAreaToolStripMenuItem"
         Me.AddGroupAreaToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
         Me.AddGroupAreaToolStripMenuItem.Text = "Add group area"
+        '
+        'RenameGroupToolStripMenuItem
+        '
+        Me.RenameGroupToolStripMenuItem.Name = "RenameGroupToolStripMenuItem"
+        Me.RenameGroupToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
+        Me.RenameGroupToolStripMenuItem.Text = "Rename Group"
+        '
+        'AddButtonToolStripMenuItem
+        '
+        Me.AddButtonToolStripMenuItem.Name = "AddButtonToolStripMenuItem"
+        Me.AddButtonToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
+        Me.AddButtonToolStripMenuItem.Text = "Add Button"
+        '
+        'RemoveButtonToolStripMenuItem
+        '
+        Me.RemoveButtonToolStripMenuItem.Name = "RemoveButtonToolStripMenuItem"
+        Me.RemoveButtonToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
+        Me.RemoveButtonToolStripMenuItem.Text = "Remove Button"
         '
         'PictureBox1
         '
@@ -60,7 +81,7 @@ Partial Class MainForm
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
-        Me.ClientSize = New System.Drawing.Size(938, 678)
+        Me.ClientSize = New System.Drawing.Size(195, 678)
         Me.Controls.Add(Me.PictureBox1)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -76,4 +97,7 @@ Partial Class MainForm
     Friend WithEvents CMS As ContextMenuStrip
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents AddGroupAreaToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents RenameGroupToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents AddButtonToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents RemoveButtonToolStripMenuItem As ToolStripMenuItem
 End Class

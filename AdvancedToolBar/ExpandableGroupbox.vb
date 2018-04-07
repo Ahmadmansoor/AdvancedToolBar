@@ -187,9 +187,13 @@ Public Class ExpandableGroupbox
         Me.Expanded = True
         Me.CaptionColor = Color.FromArgb(51, 94, 168)
         Me.HeaderClickExpand = True
+        Try
+            Me.Size = New Size(MainForm.Width - 27, 100)
+        Catch ex As Exception
+            Me.Size = New Size(200, 100)
+        End Try
 
-        'Me.Size = New Size(200, 100)
-        Me.Size = New Size(MainForm.Width - 27, 100)
+
 
         Me.lblCaption.Text = Me.Caption
         Me.lblCaption.ForeColor = Me.CaptionColor
