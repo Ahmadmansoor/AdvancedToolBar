@@ -30,6 +30,7 @@ Partial Class MainForm
         Me.AddButtonToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RemoveButtonToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.CMS.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -69,11 +70,22 @@ Partial Class MainForm
         '
         'PictureBox1
         '
-        Me.PictureBox1.Location = New System.Drawing.Point(12, 595)
+        Me.PictureBox1.Location = New System.Drawing.Point(368, 632)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(95, 54)
+        Me.PictureBox1.Size = New System.Drawing.Size(69, 34)
         Me.PictureBox1.TabIndex = 1
         Me.PictureBox1.TabStop = False
+        '
+        'FlowLayoutPanel1
+        '
+        Me.FlowLayoutPanel1.AutoScroll = True
+        Me.FlowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.FlowLayoutPanel1.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.FlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(449, 678)
+        Me.FlowLayoutPanel1.TabIndex = 2
         '
         'MainForm
         '
@@ -82,6 +94,7 @@ Partial Class MainForm
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
         Me.ClientSize = New System.Drawing.Size(449, 678)
+        Me.Controls.Add(Me.FlowLayoutPanel1)
         Me.Controls.Add(Me.PictureBox1)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -100,4 +113,5 @@ Partial Class MainForm
     Friend WithEvents RenameGroupToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AddButtonToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents RemoveButtonToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
 End Class

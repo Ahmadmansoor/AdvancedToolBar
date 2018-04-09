@@ -135,11 +135,12 @@ Public Class MainForm
     Private Sub AddGroupAreaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddGroupAreaToolStripMenuItem.Click
         Dim gb As New ExpandableGroupbox
         Getgbcount()
-        Me.Controls.Add(gb)
+        'Me.Controls.Add(gb)
+        FlowLayoutPanel1.Controls.Add(gb)
         gb.Name = gb.Name & gbCountHieght.count
         gb.Caption = gb.Name
         'gb.Size = New Size(Me.Width - gb.Left, 100)
-        gb.Location = New Point(0, gbCountHieght.top_)
+        'gb.Location = New Point(0, gbCountHieght.top_)
         gb.AutoScroll = True
         AddHandler gb.MouseClick, AddressOf gb_Click
         AddHandler gb.Expand, AddressOf gb_Expand
