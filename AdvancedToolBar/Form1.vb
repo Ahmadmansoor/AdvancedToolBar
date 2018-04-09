@@ -41,6 +41,7 @@ Public Class MainForm
     End Sub
     Private Sub MainForm_DragDrop(sender As Object, e As DragEventArgs) Handles MyBase.DragDrop
         Dim fileName() As String = e.Data.GetData(DataFormats.FileDrop)
+        Dim PictureBox_ As New PictureBox
         'MsgBox(GetLnkTarget(fileName(0)))
         'Dim myIcon As System.Drawing.Icon = Image.FromFile(fileName(0))
         'PictureBox1.Image = Image.FromFile(fileName(0))
@@ -61,8 +62,13 @@ Public Class MainForm
 
         'The icon is returned in the hIcon member of the shinfo struct.
         Dim myIcon As System.Drawing.Icon = System.Drawing.Icon.FromHandle(shinfo.hIcon)
-        PictureBox1.Image = myIcon.ToBitmap
-
+        'PictureBox1.Image = myIcon.ToBitmap
+        FlowLayoutPanel1.Controls.Add(PictureBox_)
+        PictureBox_.Show()
+        PictureBox_.Size = New Size(30, 30)
+        PictureBox_.SizeMode = PictureBoxSizeMode.StretchImage
+        'PictureBox_.Location = New Point(0, 0)
+        PictureBox_.Image = myIcon.ToBitmap
     End Sub
     Private Sub MainForm_MouseClick(sender As Object, e As MouseEventArgs) Handles MyBase.MouseClick
         If (e.Button = MouseButtons.Right) Then
