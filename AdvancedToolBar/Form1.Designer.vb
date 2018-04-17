@@ -23,30 +23,22 @@ Partial Class MainForm
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainForm))
-        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.CMS = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.CMS_Group = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.AddGroupAreaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RenameGroupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AddButtonToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MainFlowLayoutPanel = New System.Windows.Forms.FlowLayoutPanel()
+        Me.CMS_Button_Property = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.RemoveButtonToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
-        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-        Me.Option_ToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.CMS.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.ToolStrip1.SuspendLayout()
+        Me.CMS_Group.SuspendLayout()
+        Me.CMS_Button_Property.SuspendLayout()
         Me.SuspendLayout()
         '
-        'Timer1
+        'CMS_Group
         '
-        '
-        'CMS
-        '
-        Me.CMS.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddGroupAreaToolStripMenuItem, Me.RenameGroupToolStripMenuItem, Me.AddButtonToolStripMenuItem, Me.RemoveButtonToolStripMenuItem})
-        Me.CMS.Name = "CMS"
-        Me.CMS.Size = New System.Drawing.Size(157, 92)
+        Me.CMS_Group.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddGroupAreaToolStripMenuItem, Me.RenameGroupToolStripMenuItem, Me.AddButtonToolStripMenuItem})
+        Me.CMS_Group.Name = "CMS"
+        Me.CMS_Group.Size = New System.Drawing.Size(157, 70)
         '
         'AddGroupAreaToolStripMenuItem
         '
@@ -66,47 +58,27 @@ Partial Class MainForm
         Me.AddButtonToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
         Me.AddButtonToolStripMenuItem.Text = "Add Button"
         '
+        'MainFlowLayoutPanel
+        '
+        Me.MainFlowLayoutPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.MainFlowLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MainFlowLayoutPanel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.MainFlowLayoutPanel.Location = New System.Drawing.Point(0, 0)
+        Me.MainFlowLayoutPanel.Name = "MainFlowLayoutPanel"
+        Me.MainFlowLayoutPanel.Size = New System.Drawing.Size(649, 678)
+        Me.MainFlowLayoutPanel.TabIndex = 1
+        '
+        'CMS_Button_Property
+        '
+        Me.CMS_Button_Property.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RemoveButtonToolStripMenuItem})
+        Me.CMS_Button_Property.Name = "CMS_Button_Property"
+        Me.CMS_Button_Property.Size = New System.Drawing.Size(154, 48)
+        '
         'RemoveButtonToolStripMenuItem
         '
         Me.RemoveButtonToolStripMenuItem.Name = "RemoveButtonToolStripMenuItem"
-        Me.RemoveButtonToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
-        Me.RemoveButtonToolStripMenuItem.Text = "Remove Button"
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.Location = New System.Drawing.Point(368, 632)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(69, 34)
-        Me.PictureBox1.TabIndex = 1
-        Me.PictureBox1.TabStop = False
-        '
-        'FlowLayoutPanel1
-        '
-        Me.FlowLayoutPanel1.AutoScroll = True
-        Me.FlowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.FlowLayoutPanel1.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(0, 28)
-        Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(420, 434)
-        Me.FlowLayoutPanel1.TabIndex = 2
-        '
-        'ToolStrip1
-        '
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Option_ToolStripButton})
-        Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
-        Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(449, 25)
-        Me.ToolStrip1.TabIndex = 3
-        Me.ToolStrip1.Text = "ToolStrip1"
-        '
-        'Option_ToolStripButton
-        '
-        Me.Option_ToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.Option_ToolStripButton.Image = CType(resources.GetObject("Option_ToolStripButton.Image"), System.Drawing.Image)
-        Me.Option_ToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.Option_ToolStripButton.Name = "Option_ToolStripButton"
-        Me.Option_ToolStripButton.Size = New System.Drawing.Size(23, 22)
-        Me.Option_ToolStripButton.Text = "ToolStripButton1"
+        Me.RemoveButtonToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
+        Me.RemoveButtonToolStripMenuItem.Text = "RemoveButton"
         '
         'MainForm
         '
@@ -114,31 +86,22 @@ Partial Class MainForm
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
-        Me.ClientSize = New System.Drawing.Size(449, 678)
-        Me.Controls.Add(Me.ToolStrip1)
-        Me.Controls.Add(Me.FlowLayoutPanel1)
-        Me.Controls.Add(Me.PictureBox1)
+        Me.ClientSize = New System.Drawing.Size(649, 678)
+        Me.Controls.Add(Me.MainFlowLayoutPanel)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "MainForm"
         Me.Text = "Form1"
-        Me.CMS.ResumeLayout(False)
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ToolStrip1.ResumeLayout(False)
-        Me.ToolStrip1.PerformLayout()
+        Me.CMS_Group.ResumeLayout(False)
+        Me.CMS_Button_Property.ResumeLayout(False)
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents Timer1 As Timer
-    Friend WithEvents CMS As ContextMenuStrip
-    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents CMS_Group As ContextMenuStrip
     Friend WithEvents AddGroupAreaToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents RenameGroupToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AddButtonToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents MainFlowLayoutPanel As FlowLayoutPanel
+    Friend WithEvents CMS_Button_Property As ContextMenuStrip
     Friend WithEvents RemoveButtonToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
-    Friend WithEvents ToolStrip1 As ToolStrip
-    Friend WithEvents Option_ToolStripButton As ToolStripButton
 End Class

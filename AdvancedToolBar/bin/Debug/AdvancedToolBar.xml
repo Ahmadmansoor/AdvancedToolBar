@@ -53,12 +53,6 @@ AdvancedToolBar
  </summary>
  <remarks></remarks>
 </member>
-<member name="M:AdvancedToolBar.MainForm.Getgbcount">
- <summary>
- to get how many ExpandableGroupbox in the form so we can calculate the hieght and
- add the new control next to last one of controls
- </summary>
-</member>
 <member name="T:AdvancedToolBar.My.Resources.Resources">
 <summary>
   A strongly-typed resource class, for looking up localized strings, etc.
