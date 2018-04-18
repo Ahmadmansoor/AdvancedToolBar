@@ -20,8 +20,6 @@ Public Class ExpandableGroupbox
         End Try
     End Sub
 
-    Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
-
     'Required by the Windows Form Designer
     Private components As System.ComponentModel.IContainer
 
@@ -33,7 +31,6 @@ Public Class ExpandableGroupbox
         Me.pnlHeader = New System.Windows.Forms.Panel()
         Me.ExpandButton = New System.Windows.Forms.Button()
         Me.lblCaption = New System.Windows.Forms.Label()
-        Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.pnlHeader.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -63,19 +60,10 @@ Public Class ExpandableGroupbox
         Me.lblCaption.Size = New System.Drawing.Size(0, 13)
         Me.lblCaption.TabIndex = 0
         '
-        'FlowLayoutPanel1
-        '
-        Me.FlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(0, 21)
-        Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(330, 168)
-        Me.FlowLayoutPanel1.TabIndex = 1
-        '
         'ExpandableGroupbox
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.FlowLayoutPanel1)
         Me.Controls.Add(Me.pnlHeader)
         Me.Name = "ExpandableGroupbox"
         Me.Size = New System.Drawing.Size(330, 189)
@@ -323,7 +311,7 @@ Public Class ExpandableGroupbox
         End If
     End Sub
 
-    Private Sub FlowLayoutPanel1_MouseClick(sender As Object, e As MouseEventArgs) Handles FlowLayoutPanel1.MouseClick
+    Private Sub FlowLayoutPanel1_MouseClick(sender As Object, e As MouseEventArgs)
         MsgBox(Me.Caption)
     End Sub
 

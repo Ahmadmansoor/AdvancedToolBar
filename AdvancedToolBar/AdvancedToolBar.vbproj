@@ -53,6 +53,7 @@
     <Reference Include="System.Deployment" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -77,11 +78,23 @@
     <Compile Include="ExpandableGroupbox.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Form1.vb">
+    <Compile Include="FlowLayoutPanel_UC.Designer.vb">
+      <DependentUpon>FlowLayoutPanel_UC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FlowLayoutPanel_UC.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MainForm1.Designer.vb">
+      <DependentUpon>MainForm1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm1.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <Compile Include="MainForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.vb">
+      <DependentUpon>MainForm.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="KeyboardHook.vb" />
@@ -101,14 +114,19 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="PublicFunction.vb" />
-    <Compile Include="ResizeableControl.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ExpandableGroupbox.resx">
       <DependentUpon>ExpandableGroupbox.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <EmbeddedResource Include="FlowLayoutPanel_UC.resx">
+      <DependentUpon>FlowLayoutPanel_UC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm1.resx">
+      <DependentUpon>MainForm1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
