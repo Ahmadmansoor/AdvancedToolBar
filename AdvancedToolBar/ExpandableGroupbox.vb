@@ -327,6 +327,10 @@ Public Class ExpandableGroupbox
         MsgBox(Me.Caption)
     End Sub
 
+    Private Sub ExpandButton_MouseDown(sender As Object, e As MouseEventArgs) Handles ExpandButton.MouseDown
+
+    End Sub
+
 #End Region
 
 End Class

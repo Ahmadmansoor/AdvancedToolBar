@@ -16,7 +16,7 @@ Public Class MainForm
 #End Region
 
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        CMS_Group.Parent = Me.Parent
+        'CMS_Group.Parent = Me.Parent
     End Sub
 
     'Private Sub MainForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
@@ -64,22 +64,27 @@ Public Class MainForm
     End Sub
 
 #Region "MainFlowLayoutPanel"
-    Private Sub MainFlowLayoutPanel_MouseClick(sender As Object, e As MouseEventArgs) Handles MainFlowLayoutPanel.MouseClick
+    'Private Sub MainFlowLayoutPanel_MouseClick(sender As Object, e As MouseEventArgs) Handles MainFlowLayoutPanel.MouseClick
+
+    'End Sub
+    Private Sub MainFlowLayoutPanel_MouseDown(sender As Object, e As MouseEventArgs) Handles MainFlowLayoutPanel.MouseDown
         If (e.Button = MouseButtons.Right) Then
-            CMS_Group.Parent = Me.Parent
+            'CMS_Group.Parent = Me.Parent
             RemoveButtonToolStripMenuItem.Visible = False
             AddButtonToolStripMenuItem.Visible = False
             RenameGroupToolStripMenuItem.Visible = False
-            CMS_Group.Show()
-            CMS_Group.Location = New Point(e.X + Me.Left, e.Y + Me.Top + 20)
+            'CMS_Group.Show()
+            'CMS_Group.Location = New Point(e.X + Me.Left, e.Y + Me.Top + 20)
         End If
     End Sub
     Private Sub MainFlowLayoutPanel_SizeChanged(sender As Object, e As EventArgs) Handles MainFlowLayoutPanel.SizeChanged
-        For Each x As Control In MainFlowLayoutPanel.Controls
+        For Each x As FlowLayoutPanel In MainFlowLayoutPanel.Controls
             If (x.Name.Contains("FlP")) Then
+                'x.AutoSize = False
                 x.Width = MainFlowLayoutPanel.Width - 10
                 Dim MinimizeButton_ As Button = CType(x.Controls("B_" & x.Name), Button)
                 MinimizeButton_.Width = x.Width - 10
+                'x.AutoSize = True
             End If
         Next
     End Sub
@@ -92,6 +97,7 @@ Public Class MainForm
         FlP.Name = "FlP" & "_" & FlPCount()
         FlP.Width = MainFlowLayoutPanel.Width - 10
         FlP.BorderStyle = BorderStyle.Fixed3D
+        FlP.ContextMenuStrip = CMS_Group
 
         MainFlowLayoutPanel.Controls.Add(FlP)
         Dim Caption_ As String = InputBox("Enter name for Group", "Name Group")
@@ -101,8 +107,11 @@ Public Class MainForm
         MinimizeButton.Width = FlP.Width - 10
         FlP.Controls.Add(MinimizeButton)
         AddHandler MinimizeButton.MouseClick, AddressOf MinimizeButton_Click
-        AddHandler FlP.MouseClick, AddressOf FlP_MouseClick
+        'AddHandler FlP.MouseClick, AddressOf FlP_MouseClick
+        AddHandler FlP.MouseDown, AddressOf FlP_MouseDown ' we use MouseDown because we use ContextMenuStrip property so we need to set the ContextMenu befor it appear 
         FlP.Show()
+        FlP.AutoScroll = True
+        'FlP.AutoSize = True
         MinimizeButton.Anchor = AnchorStyles.Left Or AnchorStyles.Right
         MainFlowLayoutPanel.AutoScroll = True
         MainFlowLayoutPanel.AutoSize = True
@@ -110,10 +119,9 @@ Public Class MainForm
         Me.Refresh()
     End Sub
     Private Sub RenameGroupToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RenameGroupToolStripMenuItem.Click
-        Dim cp = Cursor.Position()
-        cp = New Point(PointToClient(cp))
-        Dim getControl As FlowLayoutPanel = GetChildAtPoint(cp)
-        'FIP_Clicked.BackColor = Color.Red
+        'Dim cp = Cursor.Position()
+        'cp = New Point(PointToClient(cp))
+        'Dim getControl As FlowLayoutPanel = GetChildAtPoint(cp)
         Dim MinimizeButton_ As Button = CType(FIP_Clicked.Controls("B_" & FIP_Clicked.Name), Button)
         MinimizeButton_.Text = InputBox("Change the Title of this Group", "", MinimizeButton_.Text)
     End Sub
@@ -123,31 +131,31 @@ Public Class MainForm
         newBu.ContextMenuStrip = CMS_Button_Property
         FIP_Clicked.Controls.Add(newBu)
         newBu.Size = New Size(30, 30)
+        newBu.Name = "Button_" & ButtonCount() & "_" & FIP_Clicked.Name
         newBu.Show()
-        AddHandler newBu.Click, AddressOf SubButton_Click
+        AddHandler newBu.MouseDown, AddressOf SubButton_MouseDown
     End Sub
 #End Region
 
 #Region "SubButton_Click"
-    Private Sub SubButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-
+    Dim SubButton_Clicked As Button
+    Private Sub SubButton_MouseDown(sender As Object, e As MouseEventArgs)
+        SubButton_Clicked = DirectCast(sender, Button)
+        FIP_Clicked = SubButton_Clicked.Parent
     End Sub
-
 #End Region
 
 #Region "FlP"
     Dim FIP_Clicked As FlowLayoutPanel
-    Private Sub FlP_MouseClick(sender As Object, e As MouseEventArgs)
+    Private Sub FlP_MouseDown(sender As Object, e As MouseEventArgs)
         If e.Button = MouseButtons.Right Then
             CMS_Group.Parent = Me.Parent
             AddGroupAreaToolStripMenuItem.Visible = True
             RemoveButtonToolStripMenuItem.Visible = True
             AddButtonToolStripMenuItem.Visible = True
             RenameGroupToolStripMenuItem.Visible = True
-            CMS_Group.Show()
-            CMS_Group.Location = New Point(e.X + Me.Left, e.Y + Me.Top + 20)
-            FIP_Clicked = DirectCast(sender, FlowLayoutPanel)
         End If
+        FIP_Clicked = DirectCast(sender, FlowLayoutPanel)
     End Sub
 #End Region
 
@@ -156,10 +164,12 @@ Public Class MainForm
         Dim ClickedButton As Button = DirectCast(sender, Button)
         Dim FiP_Parent As FlowLayoutPanel = ClickedButton.Parent
         If (FiP_Parent.Height <> ClickedButton.Height + 15) Then
+            FiP_Parent.AutoScroll = False
             FiP_Parent.Height = ClickedButton.Height + 15
             FiP_Parent.Width = MainFlowLayoutPanel.Width - 10
         Else
             FiP_Parent.Height = 100
+            FiP_Parent.AutoScroll = True
             FiP_Parent.Width = MainFlowLayoutPanel.Width - 10
         End If
         ClickedButton.Width = FiP_Parent.Width - 10
@@ -167,6 +177,21 @@ Public Class MainForm
         Me.Refresh()
     End Sub
 #End Region
+
+#Region "CMS_Button_Property"
+    Private Sub SizeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SizeToolStripMenuItem.Click
+        Dim NewSize As String = InputBox("Enter new size ", "New Size", SubButton_Clicked.Width & "," & SubButton_Clicked.Height)
+        'For Each x As Control In FIP_Clicked
+
+        'Next
+    End Sub
+    Private Sub RemoveButtonToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RemoveButtonToolStripMenuItem.Click
+        FIP_Clicked.Controls.Remove(SubButton_Clicked)
+        MainFlowLayoutPanel.Refresh()
+        Me.Refresh()
+    End Sub
+#End Region
+
 #Region "SubFunctions"
     Private Function FlPCount()
         Dim Count_ As Integer = 0
@@ -177,7 +202,15 @@ Public Class MainForm
         Next
         Return Count_
     End Function
-
+    Private Function ButtonCount()
+        Dim Count_ As Integer = 0
+        For Each x As Control In FIP_Clicked.Controls
+            If (x.Name.Contains("Button_")) Then
+                Count_ += 1
+            End If
+        Next
+        Return Count_
+    End Function
 #End Region
 
 End Class
