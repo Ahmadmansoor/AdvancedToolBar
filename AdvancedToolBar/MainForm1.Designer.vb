@@ -32,9 +32,7 @@ Partial Class MainForm1
         Me.RemoveButtonToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TargetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SizeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.FlowLayoutPanel_UC1 = New AdvancedToolBar.FlowLayoutPanel_UC()
         Me.CMS_Group.SuspendLayout()
-        Me.MainFlowLayoutPanel.SuspendLayout()
         Me.CMS_Button_Property.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -64,14 +62,16 @@ Partial Class MainForm1
         '
         'MainFlowLayoutPanel
         '
+        Me.MainFlowLayoutPanel.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.MainFlowLayoutPanel.AutoScroll = True
         Me.MainFlowLayoutPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.MainFlowLayoutPanel.ContextMenuStrip = Me.CMS_Group
-        Me.MainFlowLayoutPanel.Controls.Add(Me.FlowLayoutPanel_UC1)
-        Me.MainFlowLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MainFlowLayoutPanel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.MainFlowLayoutPanel.Location = New System.Drawing.Point(0, 0)
+        Me.MainFlowLayoutPanel.Location = New System.Drawing.Point(0, 34)
         Me.MainFlowLayoutPanel.Name = "MainFlowLayoutPanel"
-        Me.MainFlowLayoutPanel.Size = New System.Drawing.Size(649, 678)
+        Me.MainFlowLayoutPanel.Size = New System.Drawing.Size(649, 644)
         Me.MainFlowLayoutPanel.TabIndex = 1
         '
         'CMS_Button_Property
@@ -98,16 +98,6 @@ Partial Class MainForm1
         Me.SizeToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
         Me.SizeToolStripMenuItem.Text = "Size"
         '
-        'FlowLayoutPanel_UC1
-        '
-        Me.FlowLayoutPanel_UC1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.FlowLayoutPanel_UC1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.FlowLayoutPanel_UC1.Location = New System.Drawing.Point(4, 4)
-        Me.FlowLayoutPanel_UC1.Margin = New System.Windows.Forms.Padding(4)
-        Me.FlowLayoutPanel_UC1.Name = "FlowLayoutPanel_UC1"
-        Me.FlowLayoutPanel_UC1.Size = New System.Drawing.Size(203, 116)
-        Me.FlowLayoutPanel_UC1.TabIndex = 0
-        '
         'MainForm1
         '
         Me.AllowDrop = True
@@ -121,7 +111,6 @@ Partial Class MainForm1
         Me.Name = "MainForm1"
         Me.Text = "Form1"
         Me.CMS_Group.ResumeLayout(False)
-        Me.MainFlowLayoutPanel.ResumeLayout(False)
         Me.CMS_Button_Property.ResumeLayout(False)
         Me.ResumeLayout(False)
 
@@ -135,5 +124,4 @@ Partial Class MainForm1
     Friend WithEvents RemoveButtonToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents TargetToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SizeToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents FlowLayoutPanel_UC1 As FlowLayoutPanel_UC
 End Class

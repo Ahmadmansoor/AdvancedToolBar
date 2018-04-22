@@ -93,38 +93,27 @@ Public Class MainForm1
 
 #Region "ToolStripMenuItem"
     Private Sub AddGroupAreaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddGroupAreaToolStripMenuItem.Click
-        Dim FlP As New FlowLayoutPanel
-        Dim MinimizeButton As New Button
-        FlP.Name = "FlP" & "_" & FlPCount()
-        FlP.Width = MainFlowLayoutPanel.Width - 10
-        FlP.BorderStyle = BorderStyle.Fixed3D
-        FlP.ContextMenuStrip = CMS_Group
+        Dim FlP_UC As New FlowLayoutPanel_UC
+        'Dim FlP As New FlowLayoutPanel
+        'Dim MinimizeButton As New Button
+        FlP_UC.Name = "FlP" & "_" & FlPCount()
+        'FlP_UC.Width = MainFlowLayoutPanel.Width - 10
+        FlP_UC.Width = 250
+        FlP_UC.BorderStyle = BorderStyle.Fixed3D
+        FlP_UC.ContextMenuStrip = CMS_Group
 
-        MainFlowLayoutPanel.Controls.Add(FlP)
+        MainFlowLayoutPanel.Controls.Add(FlP_UC)
         Dim Caption_ As String = InputBox("Enter name for Group", "Name Group")
-        If Caption_ = "" Then MinimizeButton.Text = ">" Else MinimizeButton.Text = Caption_
-        MinimizeButton.Location = New Point(0, 0)
-        MinimizeButton.Name = "B_" & FlP.Name
-        MinimizeButton.Width = FlP.Width - 10
-        FlP.Controls.Add(MinimizeButton)
-        AddHandler MinimizeButton.MouseClick, AddressOf MinimizeButton_Click
-        'AddHandler FlP.MouseClick, AddressOf FlP_MouseClick
-        AddHandler FlP.MouseDown, AddressOf FlP_MouseDown ' we use MouseDown because we use ContextMenuStrip property so we need to set the ContextMenu befor it appear 
-        FlP.Show()
-        FlP.AutoScroll = True
-        'FlP.AutoSize = True
-        MinimizeButton.Anchor = AnchorStyles.Left Or AnchorStyles.Right
-        MainFlowLayoutPanel.AutoScroll = True
-        MainFlowLayoutPanel.AutoSize = True
+        If Caption_ = "" Then FlP_UC.Bu_Expand.Text = ">" Else FlP_UC.Bu_Expand.Text = Caption_
+        AddHandler FlP_UC.FlowLayoutPanel1.MouseDown, AddressOf FlP_MouseDown ' we use MouseDown because we use ContextMenuStrip property so we need to set the ContextMenu befor it appear 
+        FlP_UC.Show()
         MainFlowLayoutPanel.Refresh()
         Me.Refresh()
     End Sub
     Private Sub RenameGroupToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RenameGroupToolStripMenuItem.Click
-        'Dim cp = Cursor.Position()
-        'cp = New Point(PointToClient(cp))
-        'Dim getControl As FlowLayoutPanel = GetChildAtPoint(cp)
-        Dim MinimizeButton_ As Button = CType(FIP_Clicked.Controls("B_" & FIP_Clicked.Name), Button)
-        MinimizeButton_.Text = InputBox("Change the Title of this Group", "", MinimizeButton_.Text)
+        Dim FlP_parent As FlowLayoutPanel_UC = FIP_Clicked.Parent
+        Dim temp As String = InputBox("Change the Title of this Group", "", FlP_parent.Bu_Expand.Text)
+        If temp <> "" Then FlP_parent.Bu_Expand.Text = temp
     End Sub
 
     Private Sub AddButtonToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddButtonToolStripMenuItem.Click
@@ -150,7 +139,7 @@ Public Class MainForm1
     Dim FIP_Clicked As FlowLayoutPanel
     Private Sub FlP_MouseDown(sender As Object, e As MouseEventArgs)
         If e.Button = MouseButtons.Right Then
-            CMS_Group.Parent = Me.Parent
+            'CMS_Group.Parent = Me.Parent
             AddGroupAreaToolStripMenuItem.Visible = True
             RemoveButtonToolStripMenuItem.Visible = True
             AddButtonToolStripMenuItem.Visible = True

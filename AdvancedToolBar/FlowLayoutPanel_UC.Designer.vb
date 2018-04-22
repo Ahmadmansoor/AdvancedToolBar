@@ -33,7 +33,7 @@ Partial Class FlowLayoutPanel_UC
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.FlowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.FlowLayoutPanel1.Location = New System.Drawing.Point(0, 32)
-        Me.FlowLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.FlowLayoutPanel1.Margin = New System.Windows.Forms.Padding(4)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
         Me.FlowLayoutPanel1.Size = New System.Drawing.Size(270, 191)
         Me.FlowLayoutPanel1.TabIndex = 0
@@ -43,7 +43,7 @@ Partial Class FlowLayoutPanel_UC
         Me.Bu_Expand.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Bu_Expand.Location = New System.Drawing.Point(4, 2)
-        Me.Bu_Expand.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Bu_Expand.Margin = New System.Windows.Forms.Padding(4)
         Me.Bu_Expand.Name = "Bu_Expand"
         Me.Bu_Expand.Size = New System.Drawing.Size(263, 28)
         Me.Bu_Expand.TabIndex = 0
@@ -58,7 +58,7 @@ Partial Class FlowLayoutPanel_UC
         Me.Controls.Add(Me.Bu_Expand)
         Me.Controls.Add(Me.FlowLayoutPanel1)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "FlowLayoutPanel_UC"
         Me.Size = New System.Drawing.Size(272, 224)
         Me.ResumeLayout(False)
