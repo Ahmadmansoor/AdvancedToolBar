@@ -16,8 +16,12 @@ Public Class MainForm1
 #End Region
 
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'CMS_Group.Parent = Me.Parent
-        'FlowLayoutPanel_UC1.Caption = "test4 54 4 54"
+        'Dim co As Color = MainFlowLayoutPanel.BackColor
+        'MainFlowLayoutPanel.BackColor = Color.SteelBlue
+        'Me.TransparencyKey = Color.SteelBlue
+
+
+
     End Sub
 
     'Private Sub MainForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
@@ -65,17 +69,11 @@ Public Class MainForm1
     End Sub
 
 #Region "MainFlowLayoutPanel"
-    'Private Sub MainFlowLayoutPanel_MouseClick(sender As Object, e As MouseEventArgs) Handles MainFlowLayoutPanel.MouseClick
-
-    'End Sub
     Private Sub MainFlowLayoutPanel_MouseDown(sender As Object, e As MouseEventArgs) Handles MainFlowLayoutPanel.MouseDown
         If (e.Button = MouseButtons.Right) Then
-            'CMS_Group.Parent = Me.Parent
             RemoveButtonToolStripMenuItem.Visible = False
             AddButtonToolStripMenuItem.Visible = False
             RenameGroupToolStripMenuItem.Visible = False
-            'CMS_Group.Show()
-            'CMS_Group.Location = New Point(e.X + Me.Left, e.Y + Me.Top + 20)
         End If
     End Sub
     Private Sub MainFlowLayoutPanel_SizeChanged(sender As Object, e As EventArgs) Handles MainFlowLayoutPanel.SizeChanged
@@ -94,18 +92,17 @@ Public Class MainForm1
 #Region "ToolStripMenuItem"
     Private Sub AddGroupAreaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddGroupAreaToolStripMenuItem.Click
         Dim FlP_UC As New FlowLayoutPanel_UC
-        'Dim FlP As New FlowLayoutPanel
-        'Dim MinimizeButton As New Button
         FlP_UC.Name = "FlP" & "_" & FlPCount()
         'FlP_UC.Width = MainFlowLayoutPanel.Width - 10
         FlP_UC.Width = 250
         FlP_UC.BorderStyle = BorderStyle.Fixed3D
         FlP_UC.ContextMenuStrip = CMS_Group
-
         MainFlowLayoutPanel.Controls.Add(FlP_UC)
         Dim Caption_ As String = InputBox("Enter name for Group", "Name Group")
         If Caption_ = "" Then FlP_UC.Bu_Expand.Text = ">" Else FlP_UC.Bu_Expand.Text = Caption_
         AddHandler FlP_UC.FlowLayoutPanel1.MouseDown, AddressOf FlP_MouseDown ' we use MouseDown because we use ContextMenuStrip property so we need to set the ContextMenu befor it appear 
+        AddHandler FlP_UC.FlowLayoutPanel1.DragEnter, AddressOf FlP_DragEnter
+        AddHandler FlP_UC.FlowLayoutPanel1.DragDrop, AddressOf FlP_DragDrop
         FlP_UC.Show()
         MainFlowLayoutPanel.Refresh()
         Me.Refresh()
@@ -117,20 +114,20 @@ Public Class MainForm1
     End Sub
 
     Private Sub AddButtonToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddButtonToolStripMenuItem.Click
-        Dim newBu As New Button
+        Dim newBu As New Button_UC
         newBu.ContextMenuStrip = CMS_Button_Property
         FIP_Clicked.Controls.Add(newBu)
-        newBu.Size = New Size(30, 30)
+        'newBu.Size = New Size(30, 30)
         newBu.Name = "Button_" & ButtonCount() & "_" & FIP_Clicked.Name
         newBu.Show()
-        AddHandler newBu.MouseDown, AddressOf SubButton_MouseDown
+        'AddHandler newBu.Bu_Shell.MouseDown, AddressOf SubButton_MouseDown
     End Sub
 #End Region
 
 #Region "SubButton_Click"
-    Dim SubButton_Clicked As Button
+    Dim SubButton_Clicked As Button_UC
     Private Sub SubButton_MouseDown(sender As Object, e As MouseEventArgs)
-        SubButton_Clicked = DirectCast(sender, Button)
+        SubButton_Clicked = DirectCast(sender, Button_UC)
         FIP_Clicked = SubButton_Clicked.Parent
     End Sub
 #End Region
@@ -139,7 +136,6 @@ Public Class MainForm1
     Dim FIP_Clicked As FlowLayoutPanel
     Private Sub FlP_MouseDown(sender As Object, e As MouseEventArgs)
         If e.Button = MouseButtons.Right Then
-            'CMS_Group.Parent = Me.Parent
             AddGroupAreaToolStripMenuItem.Visible = True
             RemoveButtonToolStripMenuItem.Visible = True
             AddButtonToolStripMenuItem.Visible = True
@@ -147,26 +143,62 @@ Public Class MainForm1
         End If
         FIP_Clicked = DirectCast(sender, FlowLayoutPanel)
     End Sub
-#End Region
-
-#Region "minimizeButton"
-    Private Sub MinimizeButton_Click(sender As Object, e As MouseEventArgs)
-        Dim ClickedButton As Button = DirectCast(sender, Button)
-        Dim FiP_Parent As FlowLayoutPanel = ClickedButton.Parent
-        If (FiP_Parent.Height <> ClickedButton.Height + 15) Then
-            FiP_Parent.AutoScroll = False
-            FiP_Parent.Height = ClickedButton.Height + 15
-            FiP_Parent.Width = MainFlowLayoutPanel.Width - 10
-        Else
-            FiP_Parent.Height = 100
-            FiP_Parent.AutoScroll = True
-            FiP_Parent.Width = MainFlowLayoutPanel.Width - 10
+    Private Sub FlP_DragEnter(sender As Object, e As DragEventArgs)
+        If e.Data.GetDataPresent(DataFormats.FileDrop) Then
+            e.Effect = DragDropEffects.Copy
         End If
-        ClickedButton.Width = FiP_Parent.Width - 10
-        MainFlowLayoutPanel.Refresh()
-        Me.Refresh()
+    End Sub
+    Private Sub FlP_DragDrop(sender As Object, e As DragEventArgs)
+        Dim fileName() As String = e.Data.GetData(DataFormats.FileDrop)
+        Dim PictureBox_ As New PictureBox
+        'MsgBox(GetLnkTarget(fileName(0)))
+        'Dim myIcon As System.Drawing.Icon = Image.FromFile(fileName(0))
+        'PictureBox1.Image = Image.FromFile(fileName(0))
+        Dim hImgLarge As IntPtr  'The handle to the system image list.
+        Dim shinfo As SHFILEINFO
+        shinfo = New SHFILEINFO()
+        Dim openFileDialog1 As OpenFileDialog
+        openFileDialog1 = New OpenFileDialog()
+
+        shinfo.szDisplayName = New String(Chr(0), 260)
+        shinfo.szTypeName = New String(Chr(0), 80)
+
+        'Use this to get the small icon.
+        'hImgSmall = SHGetFileInfo(fName, 0, shinfo, Marshal.SizeOf(shinfo), SHGFI_ICON Or SHGFI_SMALLICON)
+
+        'Use this to get the large icon.
+        hImgLarge = SHGetFileInfo(fileName(0), 0, shinfo, Marshal.SizeOf(shinfo), SHGFI_ICON Or SHGFI_LARGEICON)
+
+        'The icon is returned in the hIcon member of the shinfo struct.
+        Dim myIcon As System.Drawing.Icon = System.Drawing.Icon.FromHandle(shinfo.hIcon)
+        'PictureBox1.Image = myIcon.ToBitmap
+        'FlowLayoutPanel1.Controls.Add(PictureBox_)
+        'PictureBox_.Show()
+        'PictureBox_.Size = New Size(30, 30)
+        'PictureBox_.SizeMode = PictureBoxSizeMode.StretchImage
+        'PictureBox_.Location = New Point(0, 0)
+        'PictureBox_.Image = myIcon.ToBitmap
     End Sub
 #End Region
+
+    '#Region "minimizeButton"
+    '    Private Sub MinimizeButton_Click(sender As Object, e As MouseEventArgs)
+    '        Dim ClickedButton As Button = DirectCast(sender, Button)
+    '        Dim FiP_Parent As FlowLayoutPanel = ClickedButton.Parent
+    '        If (FiP_Parent.Height <> ClickedButton.Height + 15) Then
+    '            FiP_Parent.AutoScroll = False
+    '            FiP_Parent.Height = ClickedButton.Height + 15
+    '            FiP_Parent.Width = MainFlowLayoutPanel.Width - 10
+    '        Else
+    '            FiP_Parent.Height = 100
+    '            FiP_Parent.AutoScroll = True
+    '            FiP_Parent.Width = MainFlowLayoutPanel.Width - 10
+    '        End If
+    '        ClickedButton.Width = FiP_Parent.Width - 10
+    '        MainFlowLayoutPanel.Refresh()
+    '        Me.Refresh()
+    '    End Sub
+    '#End Region
 
 #Region "CMS_Button_Property"
     Private Sub SizeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SizeToolStripMenuItem.Click

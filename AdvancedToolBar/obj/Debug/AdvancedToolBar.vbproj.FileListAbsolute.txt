@@ -14,3 +14,4 @@ D:\Code\AdvancedToolBar\AdvancedToolBar\obj\Debug\AdvancedToolBar.MainForm.resou
 D:\Code\AdvancedToolBar\AdvancedToolBar\obj\Debug\AdvancedToolBar.ExpandableGroupbox.resources
 D:\Code\AdvancedToolBar\AdvancedToolBar\obj\Debug\AdvancedToolBar.FlowLayoutPanel_UC.resources
 D:\Code\AdvancedToolBar\AdvancedToolBar\obj\Debug\AdvancedToolBar.MainForm1.resources
+D:\Code\AdvancedToolBar\AdvancedToolBar\obj\Debug\AdvancedToolBar.Button_UC.resources

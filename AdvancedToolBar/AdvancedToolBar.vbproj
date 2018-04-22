@@ -75,6 +75,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Button_UC.Designer.vb">
+      <DependentUpon>Button_UC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Button_UC.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ExpandableGroupbox.vb">
       <SubType>UserControl</SubType>
     </Compile>
@@ -116,6 +122,9 @@
     <Compile Include="PublicFunction.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Button_UC.resx">
+      <DependentUpon>Button_UC.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ExpandableGroupbox.resx">
       <DependentUpon>ExpandableGroupbox.vb</DependentUpon>
     </EmbeddedResource>

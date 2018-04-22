@@ -66,12 +66,13 @@ Partial Class MainForm1
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.MainFlowLayoutPanel.AutoScroll = True
+        Me.MainFlowLayoutPanel.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.MainFlowLayoutPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.MainFlowLayoutPanel.ContextMenuStrip = Me.CMS_Group
         Me.MainFlowLayoutPanel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.MainFlowLayoutPanel.Location = New System.Drawing.Point(0, 34)
+        Me.MainFlowLayoutPanel.Location = New System.Drawing.Point(0, 27)
         Me.MainFlowLayoutPanel.Name = "MainFlowLayoutPanel"
-        Me.MainFlowLayoutPanel.Size = New System.Drawing.Size(649, 644)
+        Me.MainFlowLayoutPanel.Size = New System.Drawing.Size(649, 651)
         Me.MainFlowLayoutPanel.TabIndex = 1
         '
         'CMS_Button_Property
