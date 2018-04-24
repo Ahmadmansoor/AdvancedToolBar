@@ -23,6 +23,7 @@ Partial Class MainForm1
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainForm1))
         Me.CMS_Group = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.AddGroupAreaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RenameGroupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -38,9 +39,9 @@ Partial Class MainForm1
         '
         'CMS_Group
         '
-        Me.CMS_Group.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddGroupAreaToolStripMenuItem, Me.RenameGroupToolStripMenuItem, Me.AddButtonToolStripMenuItem})
+        Me.CMS_Group.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddGroupAreaToolStripMenuItem, Me.RenameGroupToolStripMenuItem, Me.AddButtonToolStripMenuItem, Me.SizeToolStripMenuItem})
         Me.CMS_Group.Name = "CMS"
-        Me.CMS_Group.Size = New System.Drawing.Size(157, 70)
+        Me.CMS_Group.Size = New System.Drawing.Size(157, 114)
         '
         'AddGroupAreaToolStripMenuItem
         '
@@ -77,9 +78,9 @@ Partial Class MainForm1
         '
         'CMS_Button_Property
         '
-        Me.CMS_Button_Property.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RemoveButtonToolStripMenuItem, Me.TargetToolStripMenuItem, Me.SizeToolStripMenuItem})
+        Me.CMS_Button_Property.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RemoveButtonToolStripMenuItem, Me.TargetToolStripMenuItem})
         Me.CMS_Button_Property.Name = "CMS_Button_Property"
-        Me.CMS_Button_Property.Size = New System.Drawing.Size(154, 70)
+        Me.CMS_Button_Property.Size = New System.Drawing.Size(154, 48)
         '
         'RemoveButtonToolStripMenuItem
         '
@@ -96,7 +97,7 @@ Partial Class MainForm1
         'SizeToolStripMenuItem
         '
         Me.SizeToolStripMenuItem.Name = "SizeToolStripMenuItem"
-        Me.SizeToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
+        Me.SizeToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
         Me.SizeToolStripMenuItem.Text = "Size"
         '
         'MainForm1
@@ -107,10 +108,11 @@ Partial Class MainForm1
         Me.AutoScroll = True
         Me.ClientSize = New System.Drawing.Size(649, 678)
         Me.Controls.Add(Me.MainFlowLayoutPanel)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "MainForm1"
-        Me.Text = "Form1"
+        Me.Text = "Advanced Tool Bar ver1.0"
         Me.CMS_Group.ResumeLayout(False)
         Me.CMS_Button_Property.ResumeLayout(False)
         Me.ResumeLayout(False)

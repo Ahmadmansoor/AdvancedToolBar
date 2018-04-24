@@ -6,6 +6,11 @@ AdvancedToolBar
 </name>
 </assembly>
 <members>
+<member name="P:AdvancedToolBar.Button_UC._FilePath">
+ <summary>
+ The text shown as the caption of the <see cref="T:AdvancedToolBar.ExpandableGroupbox" />.
+ </summary>
+</member>
 <member name="E:AdvancedToolBar.ExpandableGroupbox.Expand">
  <summary>
  Fired when the control is Expanded or Collapsed.

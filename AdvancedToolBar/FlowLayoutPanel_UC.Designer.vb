@@ -28,15 +28,16 @@ Partial Class FlowLayoutPanel_UC
         '
         'FlowLayoutPanel1
         '
+        Me.FlowLayoutPanel1.AllowDrop = True
         Me.FlowLayoutPanel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.FlowLayoutPanel1.AutoScroll = True
         Me.FlowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(0, 32)
+        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(4, 32)
         Me.FlowLayoutPanel1.Margin = New System.Windows.Forms.Padding(4)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(270, 191)
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(263, 188)
         Me.FlowLayoutPanel1.TabIndex = 0
         '
         'Bu_Expand

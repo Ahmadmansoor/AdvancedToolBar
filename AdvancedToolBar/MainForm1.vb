@@ -15,6 +15,8 @@ Public Class MainForm1
     'End Sub
 #End Region
 
+#Region "Form"
+
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Dim co As Color = MainFlowLayoutPanel.BackColor
         'MainFlowLayoutPanel.BackColor = Color.SteelBlue
@@ -28,11 +30,11 @@ Public Class MainForm1
     '    'e.Cancel = True
     '    'Me.Hide()
     'End Sub
-    Private Sub MainForm_DragEnter(sender As Object, e As DragEventArgs) Handles MyBase.DragEnter
-        If e.Data.GetDataPresent(DataFormats.FileDrop) Then
-            e.Effect = DragDropEffects.Copy
-        End If
-    End Sub
+    'Private Sub MainForm_DragEnter(sender As Object, e As DragEventArgs) Handles MyBase.DragEnter
+    '    If e.Data.GetDataPresent(DataFormats.FileDrop) Then
+    '        e.Effect = DragDropEffects.Copy
+    '    End If
+    'End Sub
     Private Sub MainForm_DragDrop(sender As Object, e As DragEventArgs) Handles MyBase.DragDrop
         'Dim fileName() As String = e.Data.GetData(DataFormats.FileDrop)
         'Dim PictureBox_ As New PictureBox
@@ -68,12 +70,14 @@ Public Class MainForm1
         Me.Refresh()
     End Sub
 
+#End Region
 #Region "MainFlowLayoutPanel"
     Private Sub MainFlowLayoutPanel_MouseDown(sender As Object, e As MouseEventArgs) Handles MainFlowLayoutPanel.MouseDown
         If (e.Button = MouseButtons.Right) Then
             RemoveButtonToolStripMenuItem.Visible = False
             AddButtonToolStripMenuItem.Visible = False
             RenameGroupToolStripMenuItem.Visible = False
+            SizeToolStripMenuItem.Visible = False
         End If
     End Sub
     Private Sub MainFlowLayoutPanel_SizeChanged(sender As Object, e As EventArgs) Handles MainFlowLayoutPanel.SizeChanged
@@ -117,18 +121,23 @@ Public Class MainForm1
         Dim newBu As New Button_UC
         newBu.ContextMenuStrip = CMS_Button_Property
         FIP_Clicked.Controls.Add(newBu)
+        'FIP_Clicked.AutoScroll = True
+        'FIP_Clicked.AutoSize = True
         'newBu.Size = New Size(30, 30)
         newBu.Name = "Button_" & ButtonCount() & "_" & FIP_Clicked.Name
         newBu.Show()
-        'AddHandler newBu.Bu_Shell.MouseDown, AddressOf SubButton_MouseDown
+        FIP_Clicked.Refresh()
+        AddHandler newBu.Bu_Shell.MouseDown, AddressOf SubButton_MouseDown
     End Sub
 #End Region
 
 #Region "SubButton_Click"
-    Dim SubButton_Clicked As Button_UC
+    Dim SubButton_Clicked As Button
+    Dim SubButton_UC_Clicked As Button_UC
     Private Sub SubButton_MouseDown(sender As Object, e As MouseEventArgs)
-        SubButton_Clicked = DirectCast(sender, Button_UC)
-        FIP_Clicked = SubButton_Clicked.Parent
+        SubButton_Clicked = DirectCast(sender, Button)
+        SubButton_UC_Clicked = SubButton_Clicked.Parent
+        FIP_Clicked = SubButton_UC_Clicked.Parent
     End Sub
 #End Region
 
@@ -140,8 +149,10 @@ Public Class MainForm1
             RemoveButtonToolStripMenuItem.Visible = True
             AddButtonToolStripMenuItem.Visible = True
             RenameGroupToolStripMenuItem.Visible = True
+            SizeToolStripMenuItem.Visible = True
         End If
         FIP_Clicked = DirectCast(sender, FlowLayoutPanel)
+        FIP_Clicked.Focus()
     End Sub
     Private Sub FlP_DragEnter(sender As Object, e As DragEventArgs)
         If e.Data.GetDataPresent(DataFormats.FileDrop) Then
@@ -150,28 +161,38 @@ Public Class MainForm1
     End Sub
     Private Sub FlP_DragDrop(sender As Object, e As DragEventArgs)
         Dim fileName() As String = e.Data.GetData(DataFormats.FileDrop)
-        Dim PictureBox_ As New PictureBox
-        'MsgBox(GetLnkTarget(fileName(0)))
-        'Dim myIcon As System.Drawing.Icon = Image.FromFile(fileName(0))
-        'PictureBox1.Image = Image.FromFile(fileName(0))
-        Dim hImgLarge As IntPtr  'The handle to the system image list.
-        Dim shinfo As SHFILEINFO
-        shinfo = New SHFILEINFO()
-        Dim openFileDialog1 As OpenFileDialog
-        openFileDialog1 = New OpenFileDialog()
+        For i = 0 To fileName.Count - 1
+            Dim NewButton As New Button_UC
+            'MsgBox(GetLnkTarget(fileName(0)))
+            'Dim myIcon As System.Drawing.Icon = Image.FromFile(fileName(0))
+            'PictureBox1.Image = Image.FromFile(fileName(0))
+            Dim hImgLarge As IntPtr  'The handle to the system image list.
+            Dim shinfo As SHFILEINFO
+            shinfo = New SHFILEINFO()
+            Dim openFileDialog1 As OpenFileDialog
+            openFileDialog1 = New OpenFileDialog()
 
-        shinfo.szDisplayName = New String(Chr(0), 260)
-        shinfo.szTypeName = New String(Chr(0), 80)
+            shinfo.szDisplayName = New String(Chr(0), 260)
+            shinfo.szTypeName = New String(Chr(0), 80)
+            'Use this to get the small icon.
+            'hImgSmall = SHGetFileInfo(fName, 0, shinfo, Marshal.SizeOf(shinfo), SHGFI_ICON Or SHGFI_SMALLICON)
+            'Use this to get the large icon.
+            hImgLarge = SHGetFileInfo(fileName(i), 0, shinfo, Marshal.SizeOf(shinfo), SHGFI_ICON Or SHGFI_LARGEICON)
 
-        'Use this to get the small icon.
-        'hImgSmall = SHGetFileInfo(fName, 0, shinfo, Marshal.SizeOf(shinfo), SHGFI_ICON Or SHGFI_SMALLICON)
+            'The icon is returned in the hIcon member of the shinfo struct.
+            Dim myIcon As System.Drawing.Icon = System.Drawing.Icon.FromHandle(shinfo.hIcon)
+            NewButton.Bu_Shell.Image = myIcon.ToBitmap
+            NewButton.TB_FileName.Text = My.Computer.FileSystem.GetName(fileName(i))
+            Dim FLP_UC_Sub As FlowLayoutPanel = DirectCast(sender, FlowLayoutPanel)
+            FLP_UC_Sub.Controls.Add(NewButton)
+            NewButton._FilePath = fileName(i)
+            NewButton.Show()
+            'Dim FLP_Parant As FlowLayoutPanel_UC = FLP_UC_Sub.Parent
+            'FLP_UC_Sub.Controls.Add(FLP_Parant)
+            'FLP_Parant.Show()
+            'FLP_Parant.Bu_Expand.Image = myIcon.ToBitmap
+        Next
 
-        'Use this to get the large icon.
-        hImgLarge = SHGetFileInfo(fileName(0), 0, shinfo, Marshal.SizeOf(shinfo), SHGFI_ICON Or SHGFI_LARGEICON)
-
-        'The icon is returned in the hIcon member of the shinfo struct.
-        Dim myIcon As System.Drawing.Icon = System.Drawing.Icon.FromHandle(shinfo.hIcon)
-        'PictureBox1.Image = myIcon.ToBitmap
         'FlowLayoutPanel1.Controls.Add(PictureBox_)
         'PictureBox_.Show()
         'PictureBox_.Size = New Size(30, 30)
@@ -201,16 +222,54 @@ Public Class MainForm1
     '#End Region
 
 #Region "CMS_Button_Property"
-    Private Sub SizeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SizeToolStripMenuItem.Click
-        Dim NewSize As String = InputBox("Enter new size ", "New Size", SubButton_Clicked.Width & "," & SubButton_Clicked.Height)
-        'For Each x As Control In FIP_Clicked
+    'Private Sub SizeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SizeToolStripMenuItem.Click
+    '    Dim NewSize As String = InputBox("Enter new size ", "New Size", SubButton_Clicked.Width & "," & SubButton_Clicked.Height)
+    '    'For Each x As Control In FIP_Clicked
 
-        'Next
+    '    'Next
+    'End Sub
+    Private Sub SizeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SizeToolStripMenuItem.Click
+        Dim NewWidth As String = InputBox("Enter new width ", "New Size", FIP_Clicked.Width)
+        Dim Newheight As String = InputBox("Enter new height ", "New Size", FIP_Clicked.Height)
+
+        FIP_Clicked.Size = New Size(NewWidth, Newheight)
+        MainFlowLayoutPanel.Refresh()
+        FIP_Clicked.Refresh()
+        Me.Refresh()
+
     End Sub
     Private Sub RemoveButtonToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RemoveButtonToolStripMenuItem.Click
         FIP_Clicked.Controls.Remove(SubButton_Clicked)
         MainFlowLayoutPanel.Refresh()
         Me.Refresh()
+    End Sub
+    Private Sub TargetToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TargetToolStripMenuItem.Click
+        Dim dial As New OpenFileDialog
+        dial.ShowDialog()
+        Dim hImgLarge As IntPtr  'The handle to the system image list.
+        Dim shinfo As SHFILEINFO
+        shinfo = New SHFILEINFO()
+        Dim openFileDialog1 As OpenFileDialog
+        openFileDialog1 = New OpenFileDialog()
+
+        shinfo.szDisplayName = New String(Chr(0), 260)
+        shinfo.szTypeName = New String(Chr(0), 80)
+        'Use this to get the small icon.
+        'hImgSmall = SHGetFileInfo(fName, 0, shinfo, Marshal.SizeOf(shinfo), SHGFI_ICON Or SHGFI_SMALLICON)
+        'Use this to get the large icon.
+        hImgLarge = SHGetFileInfo(dial.FileName, 0, shinfo, Marshal.SizeOf(shinfo), SHGFI_ICON Or SHGFI_LARGEICON)
+
+        'The icon is returned in the hIcon member of the shinfo struct.
+        Dim myIcon As System.Drawing.Icon = System.Drawing.Icon.FromHandle(shinfo.hIcon)
+        SubButton_Clicked.Image = myIcon.ToBitmap
+        SubButton_UC_Clicked.TB_FileName.Text = My.Computer.FileSystem.GetName(dial.FileName)
+        SubButton_UC_Clicked._FilePath = dial.FileName
+        'SubButton_Clicked.TB_FileName.Text = My.Computer.FileSystem.GetName(dial.FileName)
+        'Dim FLP_UC_Sub As FlowLayoutPanel = DirectCast(sender, FlowLayoutPanel)
+        'FLP_UC_Sub.Controls.Add(NewButton)
+        'SubButton_Clicked._FilePath = dial.FileName
+
+
     End Sub
 #End Region
 
@@ -233,6 +292,10 @@ Public Class MainForm1
         Next
         Return Count_
     End Function
+
+
+
+
 #End Region
 
 End Class
