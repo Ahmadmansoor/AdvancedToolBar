@@ -16,20 +16,26 @@ Public Class FlowLayoutPanel_UC
             Me.AutoScroll = True
         End If
     End Sub
+    Public Sub Size_(ByVal _Width As Integer, ByVal _height As Integer)
+        Me.Size = New Size(_Width, _height)
+    End Sub
+
 
 #Region " Properties "
-    'Private _Caption As String
+    'Private _Width As Integer
+    ''Private _height As Integer
+    'Private _Size As Size
     '''' <summary>
     '''' The text shown as the caption of the <see cref="ExpandableGroupbox" />.
     '''' </summary>
     '<Browsable(True)>
-    'Public Property Caption() As String
+    'Public Property Size_(ByVal _Width As Integer, ByVal _height As Integer) As Size
     '    Get
-    '        Return _Caption
+    '        Return _Size
     '    End Get
-    '    Set(ByVal value As String)
-    '        _Caption = value
-    '        Me.Bu_Expand.Text = value
+    '    Set(ByVal value As Size)
+    '        _Size = value
+    '        Me.Size = New Size(_Width, _height)
     '    End Set
     'End Property
 

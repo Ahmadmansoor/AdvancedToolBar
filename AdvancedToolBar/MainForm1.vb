@@ -143,6 +143,7 @@ Public Class MainForm1
 
 #Region "FlP"
     Dim FIP_Clicked As FlowLayoutPanel
+    Dim FIP_UC_Clicked As FlowLayoutPanel_UC
     Private Sub FlP_MouseDown(sender As Object, e As MouseEventArgs)
         If e.Button = MouseButtons.Right Then
             AddGroupAreaToolStripMenuItem.Visible = True
@@ -152,6 +153,7 @@ Public Class MainForm1
             SizeToolStripMenuItem.Visible = True
         End If
         FIP_Clicked = DirectCast(sender, FlowLayoutPanel)
+        FIP_UC_Clicked = FIP_Clicked.Parent
         FIP_Clicked.Focus()
     End Sub
     Private Sub FlP_DragEnter(sender As Object, e As DragEventArgs)
@@ -232,7 +234,8 @@ Public Class MainForm1
         Dim NewWidth As String = InputBox("Enter new width ", "New Size", FIP_Clicked.Width)
         Dim Newheight As String = InputBox("Enter new height ", "New Size", FIP_Clicked.Height)
 
-        FIP_Clicked.Size = New Size(NewWidth, Newheight)
+        'FIP_Clicked.Size = New Size(NewWidth, Newheight)
+        FIP_UC_Clicked.Size_(NewWidth, Newheight)
         MainFlowLayoutPanel.Refresh()
         FIP_Clicked.Refresh()
         Me.Refresh()
