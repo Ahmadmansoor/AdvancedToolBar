@@ -28,20 +28,21 @@ Partial Class MainForm1
         Me.AddGroupAreaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RenameGroupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AddButtonToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SizeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MainFlowLayoutPanel = New System.Windows.Forms.FlowLayoutPanel()
         Me.CMS_Button_Property = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.RemoveButtonToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TargetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SizeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BackGroundToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CMS_Group.SuspendLayout()
         Me.CMS_Button_Property.SuspendLayout()
         Me.SuspendLayout()
         '
         'CMS_Group
         '
-        Me.CMS_Group.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddGroupAreaToolStripMenuItem, Me.RenameGroupToolStripMenuItem, Me.AddButtonToolStripMenuItem, Me.SizeToolStripMenuItem})
+        Me.CMS_Group.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddGroupAreaToolStripMenuItem, Me.RenameGroupToolStripMenuItem, Me.AddButtonToolStripMenuItem, Me.SizeToolStripMenuItem, Me.BackGroundToolStripMenuItem})
         Me.CMS_Group.Name = "CMS"
-        Me.CMS_Group.Size = New System.Drawing.Size(157, 114)
+        Me.CMS_Group.Size = New System.Drawing.Size(157, 136)
         '
         'AddGroupAreaToolStripMenuItem
         '
@@ -60,6 +61,12 @@ Partial Class MainForm1
         Me.AddButtonToolStripMenuItem.Name = "AddButtonToolStripMenuItem"
         Me.AddButtonToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
         Me.AddButtonToolStripMenuItem.Text = "Add Button"
+        '
+        'SizeToolStripMenuItem
+        '
+        Me.SizeToolStripMenuItem.Name = "SizeToolStripMenuItem"
+        Me.SizeToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
+        Me.SizeToolStripMenuItem.Text = "Size"
         '
         'MainFlowLayoutPanel
         '
@@ -94,11 +101,11 @@ Partial Class MainForm1
         Me.TargetToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
         Me.TargetToolStripMenuItem.Text = "Target"
         '
-        'SizeToolStripMenuItem
+        'BackGroundToolStripMenuItem
         '
-        Me.SizeToolStripMenuItem.Name = "SizeToolStripMenuItem"
-        Me.SizeToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
-        Me.SizeToolStripMenuItem.Text = "Size"
+        Me.BackGroundToolStripMenuItem.Name = "BackGroundToolStripMenuItem"
+        Me.BackGroundToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
+        Me.BackGroundToolStripMenuItem.Text = "BackGround"
         '
         'MainForm1
         '
@@ -127,4 +134,5 @@ Partial Class MainForm1
     Friend WithEvents RemoveButtonToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents TargetToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SizeToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents BackGroundToolStripMenuItem As ToolStripMenuItem
 End Class

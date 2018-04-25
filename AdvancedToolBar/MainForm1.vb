@@ -93,7 +93,7 @@ Public Class MainForm1
     End Sub
 #End Region
 
-#Region "ToolStripMenuItem"
+#Region "CMS_Group_ToolStripMenuItem"
     Private Sub AddGroupAreaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddGroupAreaToolStripMenuItem.Click
         Dim FlP_UC As New FlowLayoutPanel_UC
         FlP_UC.Name = "FlP" & "_" & FlPCount()
@@ -128,6 +128,15 @@ Public Class MainForm1
         newBu.Show()
         FIP_Clicked.Refresh()
         AddHandler newBu.Bu_Shell.MouseDown, AddressOf SubButton_MouseDown
+    End Sub
+    Private Sub BackGroundToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BackGroundToolStripMenuItem.Click
+        Dim openFileDialog1 As New OpenFileDialog
+        openFileDialog1.Filter = "*.jpg|jpg file|*.png|png file|All Files|*.*"
+        openFileDialog1.ShowDialog()
+
+        If (openFileDialog1.FileName = "" ) Then Exit Sub
+        FIP_Clicked.BackgroundImage = Image.FromFile(openFileDialog1.FileName)
+        FIP_Clicked.BackgroundImageLayout = ImageLayout.Stretch
     End Sub
 #End Region
 
@@ -233,7 +242,7 @@ Public Class MainForm1
     Private Sub SizeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SizeToolStripMenuItem.Click
         Dim NewWidth As String = InputBox("Enter new width ", "New Size", FIP_Clicked.Width)
         Dim Newheight As String = InputBox("Enter new height ", "New Size", FIP_Clicked.Height)
-
+        If (NewWidth = "" Or Newheight = "") Then Exit Sub
         'FIP_Clicked.Size = New Size(NewWidth, Newheight)
         FIP_UC_Clicked.Size_(NewWidth, Newheight)
         MainFlowLayoutPanel.Refresh()
@@ -295,6 +304,8 @@ Public Class MainForm1
         Next
         Return Count_
     End Function
+
+
 
 
 
