@@ -21,15 +21,16 @@ Public Class MainForm1
         'Dim co As Color = MainFlowLayoutPanel.BackColor
         'MainFlowLayoutPanel.BackColor = Color.SteelBlue
         'Me.TransparencyKey = Color.SteelBlue
-
+        Me.Height = Screen.PrimaryScreen.WorkingArea.Height
+        Me.Location = New Point(Screen.PrimaryScreen.WorkingArea.Width - Me.Width, 0)
 
 
     End Sub
 
-    'Private Sub MainForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-    '    'e.Cancel = True
-    '    'Me.Hide()
-    'End Sub
+    Private Sub MainForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        'e.Cancel = True
+        'Me.Hide()
+    End Sub
     'Private Sub MainForm_DragEnter(sender As Object, e As DragEventArgs) Handles MyBase.DragEnter
     '    If e.Data.GetDataPresent(DataFormats.FileDrop) Then
     '        e.Effect = DragDropEffects.Copy
@@ -78,6 +79,7 @@ Public Class MainForm1
             AddButtonToolStripMenuItem.Visible = False
             RenameGroupToolStripMenuItem.Visible = False
             SizeToolStripMenuItem.Visible = False
+            BackGroundToolStripMenuItem.Visible = False
         End If
     End Sub
     Private Sub MainFlowLayoutPanel_SizeChanged(sender As Object, e As EventArgs) Handles MainFlowLayoutPanel.SizeChanged
@@ -124,7 +126,7 @@ Public Class MainForm1
         'FIP_Clicked.AutoScroll = True
         'FIP_Clicked.AutoSize = True
         'newBu.Size = New Size(30, 30)
-        newBu.Name = "Button_" & ButtonCount() & "_" & FIP_Clicked.Name
+        newBu.Name = "Button_" & ButtonCount(FIP_Clicked) & "_" & FIP_Clicked.Name
         newBu.Show()
         FIP_Clicked.Refresh()
         AddHandler newBu.Bu_Shell.MouseDown, AddressOf SubButton_MouseDown
@@ -160,6 +162,7 @@ Public Class MainForm1
             AddButtonToolStripMenuItem.Visible = True
             RenameGroupToolStripMenuItem.Visible = True
             SizeToolStripMenuItem.Visible = True
+            BackGroundToolStripMenuItem.Visible = True
         End If
         FIP_Clicked = DirectCast(sender, FlowLayoutPanel)
         FIP_UC_Clicked = FIP_Clicked.Parent
@@ -195,21 +198,13 @@ Public Class MainForm1
             NewButton.Bu_Shell.Image = myIcon.ToBitmap
             NewButton.TB_FileName.Text = My.Computer.FileSystem.GetName(fileName(i))
             Dim FLP_UC_Sub As FlowLayoutPanel = DirectCast(sender, FlowLayoutPanel)
+            NewButton.Name = "Button_" & ButtonCount(FLP_UC_Sub) & "_" & FLP_UC_Sub.Name
+            NewButton.ContextMenuStrip = CMS_Button_Property
             FLP_UC_Sub.Controls.Add(NewButton)
             NewButton._FilePath = fileName(i)
             NewButton.Show()
-            'Dim FLP_Parant As FlowLayoutPanel_UC = FLP_UC_Sub.Parent
-            'FLP_UC_Sub.Controls.Add(FLP_Parant)
-            'FLP_Parant.Show()
-            'FLP_Parant.Bu_Expand.Image = myIcon.ToBitmap
+            AddHandler NewButton.Bu_Shell.MouseDown, AddressOf SubButton_MouseDown
         Next
-
-        'FlowLayoutPanel1.Controls.Add(PictureBox_)
-        'PictureBox_.Show()
-        'PictureBox_.Size = New Size(30, 30)
-        'PictureBox_.SizeMode = PictureBoxSizeMode.StretchImage
-        'PictureBox_.Location = New Point(0, 0)
-        'PictureBox_.Image = myIcon.ToBitmap
     End Sub
 #End Region
 
@@ -251,7 +246,8 @@ Public Class MainForm1
 
     End Sub
     Private Sub RemoveButtonToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RemoveButtonToolStripMenuItem.Click
-        FIP_Clicked.Controls.Remove(SubButton_Clicked)
+        Dim Bu_parant As Button_UC = SubButton_Clicked.Parent
+        FIP_Clicked.Controls.Remove(Bu_parant)
         MainFlowLayoutPanel.Refresh()
         Me.Refresh()
     End Sub
@@ -295,15 +291,39 @@ Public Class MainForm1
         Next
         Return Count_
     End Function
-    Private Function ButtonCount()
+    Private Function ButtonCount(ByVal FIP_ As FlowLayoutPanel)
         Dim Count_ As Integer = 0
-        For Each x As Control In FIP_Clicked.Controls
+        For Each x As Control In FIP_.Controls
             If (x.Name.Contains("Button_")) Then
                 Count_ += 1
             End If
         Next
         Return Count_
     End Function
+
+    Private Sub TB_Search_TextChanged(sender As Object, e As EventArgs) Handles TB_Search.TextChanged
+        For Each ss As Control In MainFlowLayoutPanel.Controls
+            If (ss.Name.Contains("FlP")) Then
+                For Each sss As Control In ss.Controls
+                    If (sss.Name.Contains("FlowLayoutPanel")) Then
+                        For Each x In sss.Controls
+                            If (x.Name.Contains("Button_")) Then
+                                Dim Bu_ As Button_UC = DirectCast(x, Button_UC)
+                                If (Bu_.TB_FileName.Text.ToLower.Contains(TB_Search.Text.ToLower)) Then
+                                    'Bu_.Focus()
+                                    sss.Controls.SetChildIndex(Bu_, 0)
+                                End If
+                            End If
+                        Next
+                    End If
+                Next
+            End If
+        Next
+    End Sub
+
+    Private Sub Bu_End_Click(sender As Object, e As EventArgs) Handles Bu_End.Click
+        End
+    End Sub
 
 
 

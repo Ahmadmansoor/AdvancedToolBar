@@ -29,11 +29,14 @@ Partial Class MainForm1
         Me.RenameGroupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AddButtonToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SizeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BackGroundToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MainFlowLayoutPanel = New System.Windows.Forms.FlowLayoutPanel()
         Me.CMS_Button_Property = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.RemoveButtonToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TargetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.BackGroundToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TB_Search = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Bu_End = New System.Windows.Forms.Button()
         Me.CMS_Group.SuspendLayout()
         Me.CMS_Button_Property.SuspendLayout()
         Me.SuspendLayout()
@@ -42,7 +45,7 @@ Partial Class MainForm1
         '
         Me.CMS_Group.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddGroupAreaToolStripMenuItem, Me.RenameGroupToolStripMenuItem, Me.AddButtonToolStripMenuItem, Me.SizeToolStripMenuItem, Me.BackGroundToolStripMenuItem})
         Me.CMS_Group.Name = "CMS"
-        Me.CMS_Group.Size = New System.Drawing.Size(157, 136)
+        Me.CMS_Group.Size = New System.Drawing.Size(157, 114)
         '
         'AddGroupAreaToolStripMenuItem
         '
@@ -68,6 +71,12 @@ Partial Class MainForm1
         Me.SizeToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
         Me.SizeToolStripMenuItem.Text = "Size"
         '
+        'BackGroundToolStripMenuItem
+        '
+        Me.BackGroundToolStripMenuItem.Name = "BackGroundToolStripMenuItem"
+        Me.BackGroundToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
+        Me.BackGroundToolStripMenuItem.Text = "BackGround"
+        '
         'MainFlowLayoutPanel
         '
         Me.MainFlowLayoutPanel.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -80,7 +89,7 @@ Partial Class MainForm1
         Me.MainFlowLayoutPanel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.MainFlowLayoutPanel.Location = New System.Drawing.Point(0, 27)
         Me.MainFlowLayoutPanel.Name = "MainFlowLayoutPanel"
-        Me.MainFlowLayoutPanel.Size = New System.Drawing.Size(649, 651)
+        Me.MainFlowLayoutPanel.Size = New System.Drawing.Size(329, 651)
         Me.MainFlowLayoutPanel.TabIndex = 1
         '
         'CMS_Button_Property
@@ -101,11 +110,32 @@ Partial Class MainForm1
         Me.TargetToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
         Me.TargetToolStripMenuItem.Text = "Target"
         '
-        'BackGroundToolStripMenuItem
+        'TB_Search
         '
-        Me.BackGroundToolStripMenuItem.Name = "BackGroundToolStripMenuItem"
-        Me.BackGroundToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
-        Me.BackGroundToolStripMenuItem.Text = "BackGround"
+        Me.TB_Search.Location = New System.Drawing.Point(70, 4)
+        Me.TB_Search.Name = "TB_Search"
+        Me.TB_Search.Size = New System.Drawing.Size(132, 20)
+        Me.TB_Search.TabIndex = 2
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(12, 5)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(52, 15)
+        Me.Label1.TabIndex = 3
+        Me.Label1.Text = "Search"
+        '
+        'Bu_End
+        '
+        Me.Bu_End.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Bu_End.Location = New System.Drawing.Point(238, 3)
+        Me.Bu_End.Name = "Bu_End"
+        Me.Bu_End.Size = New System.Drawing.Size(71, 20)
+        Me.Bu_End.TabIndex = 4
+        Me.Bu_End.Text = "End"
+        Me.Bu_End.UseVisualStyleBackColor = True
         '
         'MainForm1
         '
@@ -113,7 +143,10 @@ Partial Class MainForm1
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
-        Me.ClientSize = New System.Drawing.Size(649, 678)
+        Me.ClientSize = New System.Drawing.Size(329, 678)
+        Me.Controls.Add(Me.Bu_End)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.TB_Search)
         Me.Controls.Add(Me.MainFlowLayoutPanel)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
@@ -123,6 +156,7 @@ Partial Class MainForm1
         Me.CMS_Group.ResumeLayout(False)
         Me.CMS_Button_Property.ResumeLayout(False)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents CMS_Group As ContextMenuStrip
@@ -135,4 +169,7 @@ Partial Class MainForm1
     Friend WithEvents TargetToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SizeToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents BackGroundToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents TB_Search As TextBox
+    Friend WithEvents Label1 As Label
+    Friend WithEvents Bu_End As Button
 End Class
