@@ -37,8 +37,12 @@ Partial Class MainForm1
         Me.TB_Search = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Bu_End = New System.Windows.Forms.Button()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.CMS_Group.SuspendLayout()
+        Me.MainFlowLayoutPanel.SuspendLayout()
         Me.CMS_Button_Property.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'CMS_Group
@@ -86,6 +90,8 @@ Partial Class MainForm1
         Me.MainFlowLayoutPanel.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.MainFlowLayoutPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.MainFlowLayoutPanel.ContextMenuStrip = Me.CMS_Group
+        Me.MainFlowLayoutPanel.Controls.Add(Me.Label2)
+        Me.MainFlowLayoutPanel.Controls.Add(Me.PictureBox1)
         Me.MainFlowLayoutPanel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.MainFlowLayoutPanel.Location = New System.Drawing.Point(0, 27)
         Me.MainFlowLayoutPanel.Name = "MainFlowLayoutPanel"
@@ -137,6 +143,24 @@ Partial Class MainForm1
         Me.Bu_End.Text = "End"
         Me.Bu_End.UseVisualStyleBackColor = True
         '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(3, 0)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(52, 15)
+        Me.Label2.TabIndex = 5
+        Me.Label2.Text = "Search"
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Location = New System.Drawing.Point(61, 3)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(122, 86)
+        Me.PictureBox1.TabIndex = 6
+        Me.PictureBox1.TabStop = False
+        '
         'MainForm1
         '
         Me.AllowDrop = True
@@ -154,7 +178,10 @@ Partial Class MainForm1
         Me.Name = "MainForm1"
         Me.Text = "Advanced Tool Bar ver1.0"
         Me.CMS_Group.ResumeLayout(False)
+        Me.MainFlowLayoutPanel.ResumeLayout(False)
+        Me.MainFlowLayoutPanel.PerformLayout()
         Me.CMS_Button_Property.ResumeLayout(False)
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -172,4 +199,6 @@ Partial Class MainForm1
     Friend WithEvents TB_Search As TextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents Bu_End As Button
+    Friend WithEvents Label2 As Label
+    Friend WithEvents PictureBox1 As PictureBox
 End Class

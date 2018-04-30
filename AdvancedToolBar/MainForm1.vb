@@ -3,16 +3,34 @@ Imports System.Runtime.InteropServices
 Public Class MainForm1
 
 #Region "Hook"
-    'Private WithEvents kbHook As New KeyboardHook
+    Private WithEvents kbHook As New KeyboardHook
 
-    'Private Sub kbHook_KeyDown(ByVal Key As System.Windows.Forms.Keys) Handles kbHook.KeyDown
-    '    Dim mousepos As Rectangle = Screen.PrimaryScreen.WorkingArea
-    '    Dim x = MousePosition.X - Screen.PrimaryScreen.Bounds.X
-    '    Dim y = MousePosition.Y
-    '    If Key = 162 And x >= mousepos.Width - 10 Then
-    '        Me.Show()
-    '    End If
-    'End Sub
+    Private Sub kbHook_KeyDown(ByVal Key As System.Windows.Forms.Keys) Handles kbHook.KeyDown
+        Dim mousepos As Rectangle = Screen.PrimaryScreen.WorkingArea
+        Dim x = MousePosition.X - Screen.PrimaryScreen.Bounds.X
+        Dim y = MousePosition.Y
+        If Key = 162 And x >= mousepos.Width - 10 Then
+            Me.Show()
+        End If
+
+        If Key = Key.C AndAlso Control.ModifierKeys = 131072 Then
+            If My.Computer.Clipboard.ContainsFileDropList Then
+                Dim filelist As System.Collections.Specialized.StringCollection
+                filelist = My.Computer.Clipboard.GetFileDropList()
+                For Each filePath As String In filelist
+                    TB_Search.Text = filePath & " " & filePath
+                Next
+            End If
+            If My.Computer.Clipboard.ContainsImage Then
+
+                PictureBox1.Image = My.Computer.Clipboard.GetImage
+
+
+
+            End If
+        End If
+    End Sub
+
 #End Region
 
 #Region "Form"
