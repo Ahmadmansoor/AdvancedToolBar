@@ -2,36 +2,37 @@
 Imports System.Runtime.InteropServices
 Public Class MainForm1
 
-#Region "Hook"
-    Private WithEvents kbHook As New KeyboardHook
+    '#Region "Hook"
+    '    Private WithEvents kbHook As New KeyboardHook
 
-    Private Sub kbHook_KeyDown(ByVal Key As System.Windows.Forms.Keys) Handles kbHook.KeyDown
-        Dim mousepos As Rectangle = Screen.PrimaryScreen.WorkingArea
-        Dim x = MousePosition.X - Screen.PrimaryScreen.Bounds.X
-        Dim y = MousePosition.Y
-        If Key = 162 And x >= mousepos.Width - 10 Then
-            Me.Show()
-        End If
+    '    Private Sub kbHook_KeyDown(ByVal Key As System.Windows.Forms.Keys) Handles kbHook.KeyDown
+    '        Dim mousepos As Rectangle = Screen.PrimaryScreen.WorkingArea
+    '        Dim x = MousePosition.X - Screen.PrimaryScreen.Bounds.X
+    '        Dim y = MousePosition.Y
+    '        If Key = 162 And x >= mousepos.Width - 10 Then
+    '            Me.Show()
+    '        End If
 
-        If Key = Key.C AndAlso Control.ModifierKeys = 131072 Then
-            If My.Computer.Clipboard.ContainsFileDropList Then
-                Dim filelist As System.Collections.Specialized.StringCollection
-                filelist = My.Computer.Clipboard.GetFileDropList()
-                For Each filePath As String In filelist
-                    TB_Search.Text = filePath & " " & filePath
-                Next
-            End If
-            If My.Computer.Clipboard.ContainsImage Then
+    '        If Key = Key.C AndAlso Control.ModifierKeys = 131072 Then
 
-                PictureBox1.Image = My.Computer.Clipboard.GetImage
+    '            If My.Computer.Clipboard.ContainsFileDropList Then
+    '                Dim filelist As System.Collections.Specialized.StringCollection
+    '                filelist = My.Computer.Clipboard.GetFileDropList()
+    '                For Each filePath As String In filelist
+    '                    TB_Search.Text = filePath & " " & filePath
+    '                Next
+    '            End If
+    '            If My.Computer.Clipboard.ContainsImage Then
+
+    '                PictureBox1.Image = My.Computer.Clipboard.GetImage
 
 
 
-            End If
-        End If
-    End Sub
+    '            End If
+    '        End If
+    '    End Sub
 
-#End Region
+    '#End Region
 
 #Region "Form"
 
@@ -98,6 +99,7 @@ Public Class MainForm1
             RenameGroupToolStripMenuItem.Visible = False
             SizeToolStripMenuItem.Visible = False
             BackGroundToolStripMenuItem.Visible = False
+            RemoveToolStripMenuItem.Visible = False
         End If
     End Sub
     Private Sub MainFlowLayoutPanel_SizeChanged(sender As Object, e As EventArgs) Handles MainFlowLayoutPanel.SizeChanged
@@ -154,9 +156,16 @@ Public Class MainForm1
         openFileDialog1.Filter = "*.jpg|jpg file|*.png|png file|All Files|*.*"
         openFileDialog1.ShowDialog()
 
-        If (openFileDialog1.FileName = "" ) Then Exit Sub
+        If (openFileDialog1.FileName = "") Then Exit Sub
         FIP_Clicked.BackgroundImage = Image.FromFile(openFileDialog1.FileName)
         FIP_Clicked.BackgroundImageLayout = ImageLayout.Stretch
+    End Sub
+    Private Sub RemoveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RemoveToolStripMenuItem.Click
+        If (MsgBox("Are you sure ?", MsgBoxStyle.YesNo, "Alarm") = MsgBoxResult.Yes) Then
+            If Not (FIP_Clicked.Parent.Name.Contains("FlP")) Then Exit Sub
+            MainFlowLayoutPanel.Controls.Remove(FIP_Clicked.Parent)
+            Me.Refresh()
+        End If
     End Sub
 #End Region
 
@@ -181,6 +190,7 @@ Public Class MainForm1
             RenameGroupToolStripMenuItem.Visible = True
             SizeToolStripMenuItem.Visible = True
             BackGroundToolStripMenuItem.Visible = True
+            RemoveToolStripMenuItem.Visible = True
         End If
         FIP_Clicked = DirectCast(sender, FlowLayoutPanel)
         FIP_UC_Clicked = FIP_Clicked.Parent
@@ -252,6 +262,7 @@ Public Class MainForm1
 
     '    'Next
     'End Sub
+
     Private Sub SizeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SizeToolStripMenuItem.Click
         Dim NewWidth As String = InputBox("Enter new width ", "New Size", FIP_Clicked.Width)
         Dim Newheight As String = InputBox("Enter new height ", "New Size", FIP_Clicked.Height)
@@ -342,6 +353,11 @@ Public Class MainForm1
     Private Sub Bu_End_Click(sender As Object, e As EventArgs) Handles Bu_End.Click
         End
     End Sub
+
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs)
+        CheckFillMem()
+    End Sub
+
 
 
 
